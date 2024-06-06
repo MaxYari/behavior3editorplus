@@ -1,8 +1,13 @@
 .properties {
   padding: @padding-small-2x;
 
-  input:not([type=button]), textarea {
+  input:not([type=button]),
+  textarea {
     padding: @padding-small;
+    background-color: @color-dark4;
+    border-width: 0px;
+    border-radius: 2px;
+    color: @color-light2
   }
 
   label {
@@ -10,5 +15,6 @@
     text-transform: uppercase;
     color: @color-light3;
     .font-base;
+    font-weight: bold;
   }
 }

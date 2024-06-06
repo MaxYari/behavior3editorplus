@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -14,38 +14,38 @@
     'notificationService'
   ];
 
-  function MenubarController($scope, 
-                             $window,
-                             $state,
-                             dialogService,
-                             projectModel,
-                             notificationService) {
+  function MenubarController($scope,
+    $window,
+    $state,
+    dialogService,
+    projectModel,
+    notificationService) {
     var vm = this;
-    vm.onNewTree           = onNewTree;
-    vm.onCloseProject      = onCloseProject;
-    vm.onSaveProject       = onSaveProject;
+    vm.onNewTree = onNewTree;
+    vm.onCloseProject = onCloseProject;
+    vm.onSaveProject = onSaveProject;
     vm.onExportProjectJson = onExportProjectJson;
-    vm.onExportTreeJson    = onExportTreeJson;
-    vm.onExportNodesJson   = onExportNodesJson;
+    vm.onExportTreeJson = onExportTreeJson;
+    vm.onExportNodesJson = onExportNodesJson;
     vm.onImportProjectJson = onImportProjectJson;
-    vm.onImportTreeJson    = onImportTreeJson;
-    vm.onImportNodesJson   = onImportNodesJson;
-    vm.onUndo              = onUndo;
-    vm.onRedo              = onRedo;
-    vm.onCopy              = onCopy;
-    vm.onCut               = onCut;
-    vm.onPaste             = onPaste;
-    vm.onDuplicate         = onDuplicate;
-    vm.onRemove            = onRemove;
-    vm.onRemoveAllConns    = onRemoveAllConns;
-    vm.onRemoveInConns     = onRemoveInConns;
-    vm.onRemoveOutConns    = onRemoveOutConns;
-    vm.onAutoOrganize      = onAutoOrganize;
-    vm.onZoomIn            = onZoomIn;
-    vm.onZoomOut           = onZoomOut;
-    vm.onSelectAll         = onSelectAll;
-    vm.onDeselectAll       = onDeselectAll;
-    vm.onInvertSelection   = onInvertSelection;
+    vm.onImportTreeJson = onImportTreeJson;
+    vm.onImportNodesJson = onImportNodesJson;
+    vm.onUndo = onUndo;
+    vm.onRedo = onRedo;
+    vm.onCopy = onCopy;
+    vm.onCut = onCut;
+    vm.onPaste = onPaste;
+    vm.onDuplicate = onDuplicate;
+    vm.onRemove = onRemove;
+    vm.onRemoveAllConns = onRemoveAllConns;
+    vm.onRemoveInConns = onRemoveInConns;
+    vm.onRemoveOutConns = onRemoveOutConns;
+    vm.onAutoOrganize = onAutoOrganize;
+    vm.onZoomIn = onZoomIn;
+    vm.onZoomOut = onZoomOut;
+    vm.onSelectAll = onSelectAll;
+    vm.onDeselectAll = onDeselectAll;
+    vm.onInvertSelection = onInvertSelection;
 
     _create();
     _activate();
@@ -55,24 +55,26 @@
     }
 
     function _shortcut_projectclose(f) {
-      if (!$scope.$$phase) { 
-        $scope.$apply(function() { onCloseProject(); });
+      if (!$scope.$$phase) {
+        $scope.$apply(function () { onCloseProject(); });
       } else {
         onCloseProject();
       }
       return false;
     }
     function _shortcut_projectsave(f) {
-      if (!$scope.$$phase) { 
-        $scope.$apply(function() { onSaveProject(); });
+      if (!$scope.$$phase) {
+        $scope.$apply(function () { onSaveProject(); });
       } else {
         onSaveProject();
       }
       return false;
     }
+
     function _create() {
       Mousetrap.bind('ctrl+q', _shortcut_projectclose);
       Mousetrap.bind('ctrl+s', _shortcut_projectsave);
+      Mousetrap.bind('ctrl+e', onExportTreeJson);
       Mousetrap.bind('ctrl+z', onUndo);
       Mousetrap.bind('ctrl+shift+z', onRedo);
       Mousetrap.bind('ctrl+c', onCopy);
@@ -110,27 +112,27 @@
     }
 
     function onExportProjectJson() {
-      $state.go('editor.export', {type:'project', format:'json'});
+      $state.go('editor.export', { type: 'project', format: 'json' });
       return false;
     }
     function onExportTreeJson() {
-      $state.go('editor.export', {type:'tree', format:'json'});
+      $state.go('editor.export', { type: 'tree', format: 'json' });
       return false;
     }
     function onExportNodesJson() {
-      $state.go('editor.export', {type:'nodes', format:'json'});
+      $state.go('editor.export', { type: 'nodes', format: 'json' });
       return false;
     }
     function onImportProjectJson() {
-      $state.go('editor.import', {type:'project', format:'json'});
+      $state.go('editor.import', { type: 'project', format: 'json' });
       return false;
     }
     function onImportTreeJson() {
-      $state.go('editor.import', {type:'tree', format:'json'});
+      $state.go('editor.import', { type: 'tree', format: 'json' });
       return false;
     }
     function onImportNodesJson() {
-      $state.go('editor.import', {type:'nodes', format:'json'});
+      $state.go('editor.import', { type: 'nodes', format: 'json' });
       return false;
     }
 
@@ -143,8 +145,8 @@
       if ($window.editor.isDirty()) {
         dialogService
           .confirm(
-            'Leave without saving?', 
-            'If you proceed you will lose all unsaved modifications.', 
+            'Leave without saving?',
+            'If you proceed you will lose all unsaved modifications.',
             null)
           .then(doClose);
       } else {
@@ -156,12 +158,12 @@
     function onSaveProject() {
       projectModel
         .saveProject()
-        .then(function() {
+        .then(function () {
           notificationService.success(
             'Project saved',
             'The project has been saved'
           );
-        }, function() {
+        }, function () {
           notificationService.error(
             'Error',
             'Project couldn\'t be saved'
@@ -186,7 +188,7 @@
     }
     function onCopy() {
       var tree = _getTree();
-      tree.edit.copy(); 
+      tree.edit.copy();
       return false;
     }
     function onCut() {

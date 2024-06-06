@@ -4,10 +4,14 @@
 
 **Behavior3 Editor** is the official visual editor for the **Behavior3** libraries. It can be accessed online or you can download it to have handle local projects.
 
-
 ## Why Behavior3 Editor?
 
 Why should you use b3editor? What is different from other editors? Can it compete against commercial alternatives? - Well, check it out some characteristics of Behavior3 Editor:
+
+## Requirements
+
+Gulp pipeline has incompatibilities with some of the newer Node.js versions. 
+Been tested to work fine on Node.js 20.11.0.
 
 - **Open Source Software**: under MIT license, you can use this software freely, adapt it to your need and even use a specialized internal version in your company. You can also contribute with bug fixes, suggestions and patches to make it better.
 
