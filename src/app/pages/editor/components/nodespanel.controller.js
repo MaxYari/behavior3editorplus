@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -12,18 +12,18 @@
     'notificationService'
   ];
 
-  function NodespanelController($scope, 
-                                $window,
-                                dialogService,
-                                notificationService) {
-    
+  function NodespanelController($scope,
+    $window,
+    dialogService,
+    notificationService) {
+
     // HEAD //
     var vm = this;
     vm.nodes = null;
     vm.newTree = newTree;
-    vm.select  = select;
-    vm.remove  = remove;
-    
+    vm.select = select;
+    vm.remove = remove;
+
     _create();
     _activate();
     $scope.$on('$destroy', _destroy);
@@ -32,14 +32,14 @@
     function _activate() {
       vm.trees = [];
       vm.nodes = {
-        composite : [],
-        decorator : [],
-        action    : [],
-        condition : [],
+        composite: [],
+        decorator: [],
+        action: [],
+        condition: [],
       };
 
       var p = $window.editor.project.get();
-      p.nodes.each(function(node) {
+      p.nodes.each(function (node) {
         if (node.category === 'tree') return;
 
         var list = vm.nodes[node.category];
@@ -47,23 +47,24 @@
         list.push({
           name: node.name,
           title: _getTitle(node),
+          icon: node.icon,
           isDefault: node.isDefault
         });
       });
 
       var selected = p.trees.getSelected();
-      p.trees.each(function(tree) {
+      p.trees.each(function (tree) {
         var root = tree.blocks.getRoot();
         vm.trees.push({
-          'id'       : tree._id,
-          'name'     : root.title || 'A behavior tree',
-          'active'   : tree===selected,
+          'id': tree._id,
+          'name': root.title || 'A behavior tree',
+          'active': tree === selected,
         });
       });
     }
 
     function _event(e) {
-      setTimeout(function() {$scope.$apply(function() { _activate(); });}, 0);
+      setTimeout(function () { $scope.$apply(function () { _activate(); }); }, 0);
     }
 
     function _create() {
@@ -90,7 +91,7 @@
 
     function _getTitle(node) {
       var title = node.title || node.name;
-      title = title.replace(/(<\w+>)/g, function(match, key) { return '@'; });
+      title = title.replace(/(<\w+>)/g, function (match, key) { return '@'; });
       return title;
     }
 
@@ -107,9 +108,9 @@
     function remove(id) {
       dialogService.
         confirm(
-          'Remove tree?', 
+          'Remove tree?',
           'Are you sure you want to remove this tree?\n\nNote: all blocks using this tree will be removed.'
-        ).then(function() {
+        ).then(function () {
           var p = $window.editor.project.get();
           p.trees.remove(id);
           notificationService.success(

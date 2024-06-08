@@ -37,8 +37,8 @@
           canvas = img;
         }
 
-        e.dataTransfer.setData('name', attrs.name);
-        e.dataTransfer.setDragImage(canvas, canvas.width/2, canvas.height/2);
+        e.originalEvent.dataTransfer.setData('name', attrs.name);
+        e.originalEvent.dataTransfer.setDragImage(canvas, canvas.width/2, canvas.height/2);
       });
     }
   }

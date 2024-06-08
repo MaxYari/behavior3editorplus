@@ -1,6 +1,36 @@
 (function () {
   "use strict";
 
+  function svgToImage(svgText, cb) {
+    var svgBlob = new Blob([svgText], { type: 'image/svg+xml;charset=utf-8' });
+
+    // Generate a URL for the Blob
+    var url = URL.createObjectURL(svgBlob);
+
+    var img = new Image();
+    img.src = url;
+
+    img.onload = function () {
+      var bitmap = new createjs.Bitmap(img);
+
+      cb(bitmap);
+    };
+  }
+
+  var shortToType = {
+    "fas": "solid",
+    "far": "regular",
+    "fab": "brands"
+  };
+
+  function iconClassToMeta(className) {
+    var shortType = className.split(" ")[0];
+    var iconType = shortToType[shortType];
+    var iconName = className.substr(className.lastIndexOf("fa-") + 3);
+
+    return { type: iconType, name: iconName };
+  }
+
   b3e.draw.rootSymbol = function (block, settings) {
     // var shape = block.displayObject;
     var shape = new createjs.Shape();
@@ -24,6 +54,7 @@
   b3e.draw.sequenceSymbol = function (block, settings) {
     // var shape = block.displayObject;
     // var shape = block._shapeObject;
+
     var shape = new createjs.Shape();
 
     var w = block._width;
@@ -132,6 +163,35 @@
     // Define font sizes
     var titleFontSize = '16px'; // Font size for the title
     var fieldValueFontSize = '12px'; // Font size for the field-value pairs
+
+    // Add svg icon
+    if (block.node.icon && block.node.icon.className) {
+      var iconMeta = iconClassToMeta(block.node.icon.className);
+      if (iconMeta.type && faIconsMeta[iconMeta.name] && faIconsMeta[iconMeta.name].svg[iconMeta.type]) {
+        svgToImage(faIconsMeta[iconMeta.name].svg[iconMeta.type].raw, function (imgEl) {
+          var scale = block._height / imgEl.getBounds().height;
+          imgEl.scaleX = imgEl.scaleY = scale;
+
+
+          var height = imgEl.getBounds().height * scale;
+          var width = imgEl.getBounds().width * scale;
+          imgEl.regX = width / 2;
+          imgEl.regY = height / 2;
+
+          imgEl.x = 0;
+          imgEl.y = 0;
+
+          imgEl.alpha = 0.1;
+          // Center height        
+          imgEl.y = -height / 2;
+          // Move to the left side
+          imgEl.x = -block._width / 2;
+
+          container.addChild(imgEl);
+        });
+      }
+    }
+
 
     // Create text object for title
     var titleText = new createjs.Text(

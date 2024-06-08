@@ -99,9 +99,18 @@ canvas {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: @color-blue-light;
+  background: @color-light3;
 }
 
 ::-webkit-scrollbar-thumb:window-inactive {
-  background: @color-blue-light;
+  background: @color-light3;
+}
+
+[ng\:cloak],
+[ng-cloak],
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
+  display: none !important;
 }

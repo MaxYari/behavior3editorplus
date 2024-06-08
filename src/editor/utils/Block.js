@@ -10,17 +10,17 @@
    * @constructor
    * @param {Object} node A `b3e.Node` object.
    */
-  var Block = function(node) {
+  var Block = function (node) {
     this.Container_constructor();
 
     var dict = node.prototype || node;
-    this.id          = b3.createUUID();
-    this.node        = node;
-    this.name        = dict.name;
-    this.title       = dict.title || this.name;
-    this.category    = dict.category;
+    this.id = b3.createUUID();
+    this.node = node;
+    this.name = dict.name;
+    this.title = dict.title || this.name;
+    this.category = dict.category;
     this.description = dict.description || '';
-    this.properties  = tine.merge({}, dict.properties);
+    this.properties = tine.merge({}, dict.properties);
 
     this._settings = null;
     this._inConnection = null;
@@ -36,7 +36,7 @@
     this._displayShadow = null;
   };
   var p = createjs.extend(Block, createjs.Container);
-  
+
   /**
    * Apply the editor settings to this block.
    *
@@ -44,7 +44,7 @@
    * @param Object {b3e.SettingsManager} The settings object.
    * @protected
    */
-  p._applySettings = function(settings) {
+  p._applySettings = function (settings) {
     this._settings = settings;
 
     var color = this._settings.get('selection_color');
@@ -58,14 +58,14 @@
    * @method _redraw
    * @protected
    */
-  p._redraw = function() {
+  p._redraw = function () {
     var name = this.name;
     var category = this.category.toLowerCase();
     var shape = b3e.draw.SHAPES[category];
     var symbol = b3e.draw.SYMBOLS[name] || b3e.draw.textSymbol;
 
-    this._width = this._settings.get('block_'+category+'_width');
-    this._height = this._settings.get('block_'+category+'_height');
+    this._width = this._settings.get('block_' + category + '_width');
+    this._height = this._settings.get('block_' + category + '_height');
     this.removeAllChildren();
 
     this._displaySymbol = symbol(this, this._settings);
@@ -83,17 +83,17 @@
    * @returns {b3e.Block} A copy of this block.
    * @protected
    */
-  p._copy = function() {
+  p._copy = function () {
     var block = new b3e.Block(this.node);
 
-    block.category    = this.category;
-    block.title       = this.title;
+    block.category = this.category;
+    block.title = this.title;
     block.description = this.description;
-    block.properties  = tine.merge({}, this.properties);
-    
+    block.properties = tine.merge({}, this.properties);
+
     block._applySettings(this._settings);
-    block.x           = this.x;
-    block.y           = this.y;
+    block.x = this.x;
+    block.y = this.y;
 
 
     return block;
@@ -105,14 +105,14 @@
    * @method _snap
    * @protected
    */
-  p._snap = function() {
+  p._snap = function () {
     var snap_x = this._settings.get('snap_x');
     var snap_y = this._settings.get('snap_y');
-    var dx = this.x%snap_x;
-    var dy = this.y%snap_y;
+    var dx = this.x % snap_x;
+    var dy = this.y % snap_y;
 
-    if (dx < 0) dx = snap_x+dx;
-    if (dy < 0) dy = snap_y+dy;
+    if (dx < 0) dx = snap_x + dx;
+    if (dy < 0) dy = snap_y + dy;
 
     this.x -= dx;
     this.y -= dy;
@@ -125,10 +125,10 @@
    * @returns {Object} An object {x, y}.
    * @protected
    */
-  p._getInAnchorPosition = function() {
+  p._getInAnchorPosition = function () {
     return {
-      x: this.x-this._width/2-this._settings.get('anchor_offset_x'),
-      y: this.y-this._height/2-this._settings.get('anchor_offset_x')
+      x: this.x - this._width / 2 - this._settings.get('anchor_offset_x'),
+      y: this.y - this._height / 2 - this._settings.get('anchor_offset_x')
     };
   };
 
@@ -139,10 +139,10 @@
    * @returns {Object} An object {x, y}.
    * @protected
    */
-  p._getOutAnchorPosition = function() {
+  p._getOutAnchorPosition = function () {
     return {
-      x: this.x+this._width/2+this._settings.get('anchor_offset_x'),
-      y: this.y+this._height/2+this._settings.get('anchor_offset_x')
+      x: this.x + this._width / 2 + this._settings.get('anchor_offset_x'),
+      y: this.y + this._height / 2 + this._settings.get('anchor_offset_x')
     };
   };
 
@@ -152,7 +152,7 @@
    * @method _select
    * @protected
    */
-  p._select = function() {
+  p._select = function () {
     this._isSelected = true;
     this._displayShape.shadow = this._displayShadow;
   };
@@ -163,13 +163,13 @@
    * @method _deselect
    * @protected
    */
-  p._deselect = function() {
+  p._deselect = function () {
     this._isSelected = false;
     this._displayShape.shadow = null;
   };
 
-  p._collapse = function() {};
-  p._expand = function() {};
+  p._collapse = function () { };
+  p._expand = function () { };
 
   /**
    * Verifies if the position (x, y) hits any part of the block. This is 
@@ -183,8 +183,8 @@
    * @returns {Boolean} Whether hit the block or not.
    * @protected
    */
-  p._hitTest = function(x, y) {
-    return this._displayShape.hitTest(x-this.x, y-this.y);
+  p._hitTest = function (x, y) {
+    return this._displayShape.hitTest(x - this.x, y - this.y);
   };
 
   /**
@@ -196,11 +196,11 @@
    * @returns {Boolean} Whether hit the block's body or not.
    * @protected
    */
-  p._hitBody = function(x, y) {
+  p._hitBody = function (x, y) {
     if (this._settings.get('layout') === 'horizontal') {
-      return (Math.abs(x-this.x) < this._width/2);
+      return (Math.abs(x - this.x) < this._width / 2);
     }
-    return (Math.abs(y-this.y) < this._height/2);
+    return (Math.abs(y - this.y) < this._height / 2);
   };
 
   /**
@@ -212,13 +212,13 @@
    * @returns {Boolean} Whether hit the in anchor or not.
    * @protected
    */
-  p._hitInAnchor = function(x, y) {
+  p._hitInAnchor = function (x, y) {
     if (this._settings.get('layout') === 'horizontal') {
-      var dx = x-this.x;
-      return (Math.abs(dx) > this._width/2 && dx < 0);
+      var dx = x - this.x;
+      return (Math.abs(dx) > this._width / 2 && dx < 0);
     }
-    var dy = y-this.y;
-    return (Math.abs(dy) > this._height/2 && dy < 0);
+    var dy = y - this.y;
+    return (Math.abs(dy) > this._height / 2 && dy < 0);
   };
 
   /**
@@ -230,13 +230,13 @@
    * @returns {Boolean} Whether hit the out anchor or not.
    * @protected
    */
-  p._hitOutAnchor = function(x, y) {
+  p._hitOutAnchor = function (x, y) {
     if (this._settings.get('layout') === 'horizontal') {
-      var dx = x-this.x;
-      return (Math.abs(dx) > this._width/2 && dx > 0);
+      var dx = x - this.x;
+      return (Math.abs(dx) > this._width / 2 && dx > 0);
     }
-    var dy = y-this.y;
-    return (Math.abs(dy) > this._height/2 && dy > 0);
+    var dy = y - this.y;
+    return (Math.abs(dy) > this._height / 2 && dy > 0);
   };
 
   /**
@@ -250,11 +250,11 @@
    * @returns {Boolean} Whether the block is contained in the rectangle or not.
    * @protected
    */
-  p._isContainedIn = function(x1, y1, x2, y2) {
-    if (x1 < this.x-this._width/2 &&
-        y1 < this.y-this._height/2 &&
-        x2 > this.x+this._width/2 &&
-        y2 > this.y+this._height/2) {
+  p._isContainedIn = function (x1, y1, x2, y2) {
+    if (x1 < this.x - this._width / 2 &&
+      y1 < this.y - this._height / 2 &&
+      x2 > this.x + this._width / 2 &&
+      y2 > this.y + this._height / 2) {
       return true;
     }
 
@@ -274,11 +274,11 @@
    * @method getTitle
    * @returns {String} The compiled title.
    */
-  p.getTitle = function() {
+  p.getTitle = function () {
     var s = this.title || this.name;
     var this_ = this;
-    return s.replace(/(<\w+>)/g, function(match, key) {
-      var attr = key.substring(1, key.length-1);
+    return s.replace(/(<\w+>)/g, function (match, key) {
+      var attr = key.substring(1, key.length - 1);
       if (this_.properties.hasOwnProperty(attr))
         return this_.properties[attr];
       else
@@ -299,13 +299,13 @@
    *                            argument to the callback.
    * @param {Object} thisarg The object for `this` reference.
    */
-  p.traversal = function(callback, thisarg) {
+  p.traversal = function (callback, thisarg) {
     var blocks = [this];
     while (blocks.length > 0) {
       var block = blocks.pop();
       if (callback.call(thisarg, block) === false) return;
 
-      for (var i=block._outConnections.length-1; i>=0; i--) {
+      for (var i = block._outConnections.length - 1; i >= 0; i--) {
         var c = block._outConnections[i];
         if (c._outBlock) blocks.push(c._outBlock);
       }

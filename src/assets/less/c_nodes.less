@@ -32,30 +32,40 @@
         .edit {
           float: right;
           color: @color-light1;
+
           &:hover {
             text-decoration: none;
             background-color: @color-yellow;
           }
         }
+
         .remove {
           float: right;
           color: @color-light1;
+
           &:hover {
             text-decoration: none;
             background-color: @color-red;
           }
         }
+
         a {
           padding: 2px @padding-small;
           display: block;
           color: @color-light1;
+
           &:hover {
             background-color: @color-dark2;
           }
+
           &.active {
             color: @color-blue;
             // font-weight: 600;
           }
+        }
+
+        i {
+          width: 1.2em;
         }
       }
     }

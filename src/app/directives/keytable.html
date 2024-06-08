@@ -10,27 +10,15 @@
 
   <tbody>
     <tr ng-repeat="item in keytable.rows">
-      <td><input type="text"
-                 class="form-control"
-                 placeholder="key"
-                 value="{{item.key}}"
-                 ng-disabled="item.fixed"
-                 ng-model="item.key"
-                 ng-change="keytable.change()"/>
+      <td><input type="text" class="form-control" placeholder="key" value="{{item.key}}" ng-disabled="item.fixed"
+          ng-model="item.key" ng-model-options="{ debounce: 300 }" ng-change="keytable.change()" />
       </td>
-      <td><input type="text" 
-                 class="form-control"
-                 placeholder="value"
-                 value="{{item.value}}"
-                 ng-model="item.value"
-                 ng-change="keytable.change()"/>
+      <td><input type="text" class="form-control" placeholder="value" value="{{item.value}}" ng-model="item.value"
+          ng-model-options="{ debounce: 300 }" ng-change="keytable.change()" />
       </td>
       <td class="text-right">
-        <input type="button" 
-               class="btn btn-danger btn-xs"
-               ng-disabled="item.fixed"
-               ng-click="keytable.remove($index)"
-               value="-">
+        <input type="button" class="btn btn-danger btn-xs" ng-disabled="item.fixed" ng-click="keytable.remove($index)"
+          value="-">
       </td>
     </tr>
   </tbody>

@@ -1,17 +1,40 @@
+.dash-sidebar {
+  .header-button {
+    font-style: italic;
+    text-align: right;
+    margin-right: @padding-large;
+    transition: transform .3s;
+
+    &:hover {
+      transform: translateX(10px);
+    }
+  }
+}
+
 .dash-menu {
   list-style: none;
   text-align: right;
   margin-right: @padding-large;
-  font-size: 2em;
+  font-size: 1.5em;
   .font-header;
 
   li {
-    margin-bottom: 10px;  
-  
+    margin-bottom: 10px;
+
     a {
-      color: @color-light2; 
-      &.active { color: @color-light1; }
-      &:hover { color: @color-light1; }
+      color: @color-light2;
+
+      i {
+        width: 1.2em;
+      }
+
+      &.active {
+        color: @color-light1;
+      }
+
+      &:hover {
+        color: @color-light1;
+      }
     }
   }
 }

@@ -16,12 +16,12 @@
   ];
 
   function projectModel($q,
-                          $rootScope,
-                          $window,
-                          storageService,
-                          systemService,
-                          localStorageService,
-                          editorService) {
+    $rootScope,
+    $window,
+    storageService,
+    systemService,
+    localStorageService,
+    editorService) {
 
     // HEAD //
     var recentPath = systemService.join(systemService.getDataPath(), 'recents.json');
@@ -29,13 +29,13 @@
     var currentProject = null;
 
     var service = {
-      getRecentProjects   : getRecentProjects,
-      newProject          : newProject,
-      getProject          : getProject,
-      saveProject         : saveProject,
-      openProject         : openProject,
-      closeProject        : closeProject,
-      removeProject       : removeProject,
+      getRecentProjects: getRecentProjects,
+      newProject: newProject,
+      getProject: getProject,
+      saveProject: saveProject,
+      openProject: openProject,
+      closeProject: closeProject,
+      removeProject: removeProject,
     };
     return service;
 
@@ -45,7 +45,7 @@
     }
     function _updateRecentProjects(project) {
       if (project) {
-        for (var i=recentCache.length-1; i>=0; i--) {
+        for (var i = recentCache.length - 1; i >= 0; i--) {
           if (recentCache[i].path === project.path) {
             recentCache.splice(i, 1);
           } else {
@@ -54,15 +54,15 @@
         }
 
         var data = {
-          name        : project.name,
-          description : project.description,
-          path        : project.path,
-          isOpen      : true,
+          name: project.name,
+          description: project.description,
+          path: project.path,
+          isOpen: true,
         };
-        
+
         recentCache.splice(0, 0, data);
       } else {
-        for (var j=0; j<recentCache.length; j++) {
+        for (var j = 0; j < recentCache.length; j++) {
           recentCache[j].isOpen = false;
         }
       }
@@ -77,13 +77,13 @@
     }
 
     function getRecentProjects() {
-      return $q(function(resolve, reject) {
+      return $q(function (resolve, reject) {
         if (!recentCache) {
           var data;
 
           try {
             data = storageService.load(recentPath);
-          } catch (e) {}
+          } catch (e) { }
 
           if (!data) {
             data = [];
@@ -95,7 +95,7 @@
       });
     }
     function newProject(path, name) {
-      return $q(function(resolve, reject) {
+      return $q(function (resolve, reject) {
         var project = {
           name: name,
           description: '',
@@ -106,7 +106,7 @@
         editorService.newProject();
         project.data = editorService.exportProject();
         saveProject(project)
-          .then(function() { 
+          .then(function () {
             _setProject(project);
             resolve();
           });
@@ -118,8 +118,8 @@
     function saveProject(project) {
       project = project || currentProject;
       project.data = editorService.exportProject();
-      
-      return $q(function(resolve, reject) {
+
+      return $q(function (resolve, reject) {
         $window.editor.clearDirty();
         storageService.save(project.path, project);
         _updateRecentProjects(project);
@@ -127,28 +127,30 @@
       });
     }
     function openProject(path) {
-      return $q(function(resolve, reject) {
+      return $q(function (resolve, reject) {
         try {
           var project = storageService.load(path);
           editorService.openProject(project.data);
           _setProject(project);
           resolve();
         } catch (e) {
+          debugger;
+          console.error(e);
           reject(e);
         }
       });
     }
     function closeProject() {
-      return $q(function(resolve, reject) {
+      return $q(function (resolve, reject) {
         $window.editor.clearDirty();
         editorService.closeProject();
         _setProject(null);
         resolve();
-      }); 
+      });
     }
     function removeProject(path) {
-      return $q(function(resolve, reject) {
-        for (var i=0; i<recentCache.length; i++) {
+      return $q(function (resolve, reject) {
+        for (var i = 0; i < recentCache.length; i++) {
           if (recentCache[i].path === path) {
             recentCache.splice(i, 1);
             break;

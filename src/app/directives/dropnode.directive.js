@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -11,28 +11,28 @@
 
   function dropNode($window) {
     var directive = {
-      restrict    : 'A',
-      link        : link,
+      restrict: 'A',
+      link: link,
     };
     return directive;
 
     function link(scope, element, attrs) {
-      element.bind('dragover', function(e) {
+      element.bind('dragover', function (e) {
         if (e.preventDefault) {
           e.preventDefault();
         }
         return false;
       });
-      element.bind('drop', function(e) {
+      element.bind('drop', function (e) {
         if (e.preventDefault) {
           e.preventDefault();
         }
         if (e.stopPropagation) {
           e.stopPropagation();
         }
-        
-        var name = e.dataTransfer.getData('name');
-        
+
+        var name = e.originalEvent.dataTransfer.getData('name');
+
         var project = $window.editor.project.get();
         var tree = project.trees.getSelected();
         var point = tree.view.getLocalPoint(e.clientX, e.clientY);

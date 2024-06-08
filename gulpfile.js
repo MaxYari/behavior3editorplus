@@ -25,6 +25,7 @@ var build_date = (new Date()).toISOString().replace(/T.*/, '');
 
 // FILES ======================================================================
 var vendor_js = [
+  'node_modules/jquery/dist/jquery.js',
   'src/assets/libs/createjs.min.js',
   'src/assets/libs/creatine-1.0.0.min.js',
   'src/assets/libs/behavior3js-0.1.0.min.js',
@@ -34,13 +35,15 @@ var vendor_js = [
   'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
   'bower_components/angular-ui-router/release/angular-ui-router.min.js',
   'bower_components/sweetalert/dist/sweetalert.min.js',
+  'node_modules/fontawesome-iconpicker/dist/js/fontawesome-iconpicker.min.js'
 ];
 var vendor_css = [
   'bower_components/bootstrap/dist/css/bootstrap.min.css',
   'bower_components/sweetalert/dist/sweetalert.css',
+  'node_modules/fontawesome-iconpicker/dist/css/fontawesome-iconpicker.css'
 ];
 var vendor_fonts = [
-  'bower_components/fontawesome/fonts/*',
+  'bower_components/fontawesome/webfonts/*',
   'src/assets/fonts/**/*',
 ];
 
@@ -49,7 +52,7 @@ var preload_js = [
 ];
 
 var preload_css = [
-  'bower_components/fontawesome/css/font-awesome.min.css',
+  'bower_components/fontawesome/css/all.min.css',
   'src/assets/css/preload.css',
 ];
 
@@ -62,6 +65,9 @@ var app_js = [
   'src/app/app.controller.js',
   'src/app/**/*.js',
   'src/start.js',
+];
+var app_json = [
+  'bower_components/fontawesome/metadata/icons.json',
 ];
 var app_less = [
   'src/assets/less/index.less',
@@ -84,7 +90,7 @@ var app_entry = [
 // TASKS (VENDOR) =============================================================
 gulp.task('_vendor_js', function () {
   return gulp.src(vendor_js)
-    .pipe(uglify())
+    //.pipe(uglify())
     .pipe(concat('vendor.min.js'))
     .pipe(gulp.dest('build/js'))
 });
@@ -98,7 +104,7 @@ gulp.task('_vendor_css', function () {
 
 gulp.task('_vendor_fonts', function () {
   return gulp.src(vendor_fonts)
-    .pipe(gulp.dest('build/fonts'))
+    .pipe(gulp.dest('build/webfonts'))
 });
 
 gulp.task('_vendor', ['_vendor_js', '_vendor_css', '_vendor_fonts']);
@@ -147,6 +153,11 @@ gulp.task('_app_js_build', function () {
     .pipe(connect.reload())
 });
 
+gulp.task("_app_json", function () {
+  return gulp.src(app_json)
+    .pipe(gulp.dest('build/json'))
+})
+
 gulp.task('_app_less', function () {
   return gulp.src(app_less)
     .pipe(less())
@@ -182,6 +193,7 @@ gulp.task('_app_entry', function () {
 
 gulp.task('_app_dev', [
   '_app_js_dev',
+  "_app_json",
   '_app_less',
   '_app_imgs',
   '_app_html',
@@ -189,6 +201,7 @@ gulp.task('_app_dev', [
 ]);
 gulp.task('_app_build', [
   '_app_js_build',
+  "_app_json",
   '_app_less',
   '_app_imgs',
   '_app_html',

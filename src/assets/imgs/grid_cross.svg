@@ -37,8 +37,8 @@
      inkscape:snap-object-midpoints="true"
      inkscape:window-width="1624"
      inkscape:window-height="1228"
-     inkscape:window-x="453"
-     inkscape:window-y="39"
+     inkscape:window-x="351"
+     inkscape:window-y="81"
      inkscape:window-maximized="0" />
   <metadata
      id="metadata5">
@@ -58,7 +58,7 @@
      id="layer1">
     <path
        id="rect833"
-       style="fill:#fcfcfc;fill-opacity:1;stroke:#ffffff;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;opacity:0.04"
+       style="fill:#fcfcfc;fill-opacity:1;stroke:#ffffff;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;opacity:0.1"
        d="M 45.410156 37.644531 L 45.410156 45.410156 L 37.644531 45.410156 L 37.644531 50.589844 L 45.410156 50.589844 L 45.410156 58.355469 L 50.589844 58.355469 L 50.589844 50.589844 L 58.355469 50.589844 L 58.355469 45.410156 L 50.589844 45.410156 L 50.589844 37.644531 L 45.410156 37.644531 z "
        transform="scale(0.26458333)" />
   </g>

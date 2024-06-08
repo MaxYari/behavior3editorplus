@@ -1,3 +1,11 @@
+// Synchroniously fetch fontawesome icons metadata, includes raw svgs as strings
+$.ajaxSetup({ async: false });
+if (!window.faIconsMeta) {
+  $.getJSON("json/icons.json", function (d) { window.faIconsMeta = d; });
+}
+$.ajaxSetup({ async: true });
+
+// Setup Angular
 angular.module('app', [
   'ui.router',
   'ui.bootstrap',
@@ -5,58 +13,56 @@ angular.module('app', [
   'templates'
 ])
 
-.run(['$rootScope', '$window', '$state',
-  function Execute($rootScope, $window, $state) {
-    $rootScope.isDesktop = !!$window.process && !!$window.require;
+  .run(['$rootScope', '$window', '$state',
+    function Execute($rootScope, $window, $state) {
+      $rootScope.isDesktop = !!$window.process && !!$window.require;
 
-    $rootScope.go = function(state, params) {
-      $state.go(state, params);
-    };
-  }
-])
+      $rootScope.go = function (state, params) {
+        $state.go(state, params);
+      };
+    }
+  ])
 
-.run(['$window', '$animate', '$location', '$document', '$timeout', 'settingsModel', 'projectModel',
-  function Execute($window,
-                   $animate,
-                   $location,
-                   $document,
-                   $timeout,
-                   settingsModel, 
-                   projectModel) {
+  .run(['$window', '$animate', '$location', '$document', '$timeout', 'settingsModel', 'projectModel',
+    function Execute($window,
+      $animate,
+      $location,
+      $document,
+      $timeout,
+      settingsModel,
+      projectModel) {
 
-    // reset path
-    $location.path('/');
+      // reset path
+      $location.path('/');
 
-    // add drop to canvas
-    angular
-      .element($window.editor._game.canvas)
-      .attr('b3-drop-node', true);
+      // add drop to canvas
+      angular
+        .element($window.editor._game.canvas)
+        .attr('b3-drop-node', true);
 
-    // initialize editor
-    settingsModel.getSettings();
-    projectModel
-      .getRecentProjects()
-      .then(function(projects) {
-        
-        function closePreload() {
-          $timeout(function() {
-            var element = angular.element(document.getElementById('page-preload'));
-            $animate.addClass(element, 'preload-fade')
-              .then(function() {
-                element.remove();
-              });
-          }, 500);
-        }
+      // initialize editor
+      settingsModel.getSettings();
+      projectModel
+        .getRecentProjects()
+        .then(function (projects) {
 
-        if (projects.length > 0 && projects[0].isOpen) {
-          projectModel
-            .openProject(projects[0].path)
-            .then(function() {
-              closePreload();
-            });
-        } else {
-          closePreload();
-        }
-      });
-  }
-]);
+          function closePreload() {
+            $timeout(function () {
+              var element = angular.element(document.getElementById('page-preload'));
+              $animate.addClass(element, 'preload-fade')
+                .then(function () {
+                  element.remove();
+                });
+            }, 500);
+          }
+
+          if (projects.length > 0 && projects[0].isOpen) {
+            projectModel
+              .openProject(projects[0].path)
+              .then(closePreload, closePreload)
+          } else {
+            closePreload();
+          }
+        });
+    }
+  ]);

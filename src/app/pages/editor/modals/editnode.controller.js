@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -15,11 +15,11 @@
   ];
 
   function EditNodeController($scope,
-                              $window,
-                              $state,
-                              $stateParams,
-                              dialogService,
-                              notificationService) {
+    $window,
+    $state,
+    $stateParams,
+    dialogService,
+    notificationService) {
     var vm = this;
     vm.action = 'New';
     vm.node = null;
@@ -43,8 +43,10 @@
         vm.node.category = 'composite';
       }
 
+
+
       var blacklist = [];
-      p.nodes.each(function(node) {
+      p.nodes.each(function (node) {
         if (node.name !== vm.node.name) {
           blacklist.push(node.name);
         }
@@ -56,10 +58,12 @@
       var p = $window.editor.project.get();
 
       if (vm.original) {
-        p.nodes.update(vm.original, vm.node);  
+        p.nodes.update(vm.original, vm.node);
       } else {
         p.nodes.add(vm.node);
       }
+
+      console.log(vm.node);
 
       $state.go('editor');
       notificationService
@@ -69,9 +73,9 @@
     function remove() {
       dialogService.
         confirm(
-          'Remove node?', 
+          'Remove node?',
           'Are you sure you want to remove this node?\n\nNote: all blocks using this node will be removed.'
-        ).then(function() {
+        ).then(function () {
           var p = $window.editor.project.get();
           p.nodes.remove(vm.original);
           notificationService.success(

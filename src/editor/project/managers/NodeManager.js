@@ -1,4 +1,4 @@
-b3e.project.NodeManager = function(editor, project) {
+b3e.project.NodeManager = function (editor, project) {
   "use strict";
 
   /**
@@ -8,7 +8,7 @@ b3e.project.NodeManager = function(editor, project) {
    * - a `b3e.Node` instance.
    * - a generic object containing the node prototype.
    */
-  this.add = function(node, isDefault) {
+  this.add = function (node, isDefault) {
     if (node.prototype) node = node.prototype;
 
     if (project._nodes[node.name]) {
@@ -16,12 +16,13 @@ b3e.project.NodeManager = function(editor, project) {
     }
 
     if (!(node instanceof b3e.Node)) {
-      var n         = new b3e.Node(isDefault);
-      n.name        = node.name;
-      n.category    = node.category;
-      n.title       = node.title;
+      var n = new b3e.Node(isDefault);
+      n.name = node.name;
+      n.category = node.category;
+      n.title = node.title;
+      n.icon = node.icon || {};
       n.description = node.description;
-      n.properties  = tine.merge({}, node.properties||node.parameters);
+      n.properties = tine.merge({}, node.properties || node.parameters);
 
       node = n;
     }
@@ -39,7 +40,7 @@ b3e.project.NodeManager = function(editor, project) {
   /**
    * 
    */
-  this.get = function(node) {
+  this.get = function (node) {
     if (typeof node !== 'string') return node;
     return project._nodes[node];
   };
@@ -47,7 +48,7 @@ b3e.project.NodeManager = function(editor, project) {
   /**
    * 
    */
-  this.update = function(node, template) {
+  this.update = function (node, template) {
     node = this.get(node);
     var oldName = node.name;
 
@@ -57,11 +58,12 @@ b3e.project.NodeManager = function(editor, project) {
 
 
     var _oldValues = {
-      name        : node.name,
-      title       : node.title,
-      description : node.description,
-      category    : node.category,
-      properties  : node.properties,
+      name: node.name,
+      title: node.title,
+      icon: node.icon,
+      description: node.description,
+      category: node.category,
+      properties: node.properties,
     };
 
     if (typeof template.name !== 'undefined') {
@@ -70,6 +72,9 @@ b3e.project.NodeManager = function(editor, project) {
     if (typeof template.title !== 'undefined') {
       node.title = template.title;
     }
+    if (typeof template.icon !== 'undefined') {
+      node.icon = template.icon;
+    }
     if (typeof template.category !== 'undefined') {
       node.category = template.category;
     }
@@ -77,22 +82,23 @@ b3e.project.NodeManager = function(editor, project) {
       node.description = template.description;
     }
     if (typeof template.properties !== 'undefined') {
-      node.properties  = tine.merge({}, template.properties);
+      node.properties = tine.merge({}, template.properties);
     }
 
     var _newValues = {
-      name        : node.name,
-      title       : node.title,
-      description : node.description,
-      category    : node.category,
-      properties  : node.properties,
+      name: node.name,
+      title: node.title,
+      icon: node.icon,
+      description: node.description,
+      category: node.category,
+      properties: node.properties,
     };
 
     project.history._beginBatch();
 
-    project.trees.each(function(tree) {
+    project.trees.each(function (tree) {
       var blocks = tree.blocks.getAll();
-      for (var i=blocks.length-1; i>=0; i--) {
+      for (var i = blocks.length - 1; i >= 0; i--) {
         if (blocks[i].name === oldName) {
           tree.blocks.update(blocks[i]);
         }
@@ -112,15 +118,15 @@ b3e.project.NodeManager = function(editor, project) {
   /**
    * 
    */
-  this.remove = function(node) {
+  this.remove = function (node) {
     project.history._beginBatch();
 
-    var name = node.name||node;
+    var name = node.name || node;
     delete project._nodes[name];
 
-    project.trees.each(function(tree) {
+    project.trees.each(function (tree) {
       var blocks = tree.blocks.getAll();
-      for (var i=blocks.length-1; i>=0; i--) {
+      for (var i = blocks.length - 1; i >= 0; i--) {
         if (blocks[i].name === name) {
           tree.blocks.remove(blocks[i]);
         }
@@ -139,11 +145,11 @@ b3e.project.NodeManager = function(editor, project) {
   /**
    * Iterates over node list.
    */
-  this.each = function(callback, thisarg) {
-    Object.keys(project._nodes).forEach(function(key) {
+  this.each = function (callback, thisarg) {
+    Object.keys(project._nodes).forEach(function (key) {
       callback.call(thisarg, project._nodes[key]);
     });
   };
 
-  this._applySettings = function(settings) {};
+  this._applySettings = function (settings) { };
 };
