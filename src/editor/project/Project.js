@@ -28,23 +28,23 @@
     this.nodes.add(b3e.Root, true);
     this.nodes.add(b3e.Sequence, true);
     this.nodes.add(b3e.Priority, true);
-    //this.nodes.add(b3e.Random, true);
-    this.nodes.add(b3e.MemSequence, true);
-    this.nodes.add(b3e.MemPriority, true);
+    this.nodes.add(b3e.Random, true);
+    //this.nodes.add(b3e.MemSequence, true);
+    //this.nodes.add(b3e.MemPriority, true);
     this.nodes.add(b3e.Repeater, true);
     this.nodes.add(b3e.RepeatUntilFailure, true);
     this.nodes.add(b3e.RepeatUntilSuccess, true);
-    this.nodes.add(b3e.MaxTime, true);
+    //this.nodes.add(b3e.MaxTime, true);
     this.nodes.add(b3e.Inverter, true);
-    //this.nodes.add(b3e.AlwaysSucceed, true);
-    //this.nodes.add(b3e.AlwaysFail, true);
-    //this.nodes.add(b3e.Cooldown, true);
-    this.nodes.add(b3e.Limiter, true);
+    this.nodes.add(b3e.AlwaysSucceed, true);
+    this.nodes.add(b3e.AlwaysFail, true);
+    this.nodes.add(b3e.Cooldown, true);
+    //this.nodes.add(b3e.Limiter, true);
     this.nodes.add(b3e.Failer, true);
     this.nodes.add(b3e.Succeeder, true);
     this.nodes.add(b3e.Runner, true);
     this.nodes.add(b3e.Wait, true);
-    this.nodes.add(b3e.Error, true);
+    //this.nodes.add(b3e.Error, true);
 
 
     this._applySettings(this._editor._settings);
