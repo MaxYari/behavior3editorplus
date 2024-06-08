@@ -34,6 +34,9 @@
     this.nodes.add(b3e.Repeater, true);
     this.nodes.add(b3e.RepeatUntilFailure, true);
     this.nodes.add(b3e.RepeatUntilSuccess, true);
+    reg.register("RandomCondition", RandomCondition) // Add
+    reg.register("StateCondition", StateCondition) // Add
+    reg.register("ContinuousStateCondition", ContinuousStateCondition) // Add
     //this.nodes.add(b3e.MaxTime, true);
     this.nodes.add(b3e.Inverter, true);
     this.nodes.add(b3e.AlwaysSucceed, true);
