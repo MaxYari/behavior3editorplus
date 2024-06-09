@@ -34,9 +34,8 @@
     this.nodes.add(b3e.Repeater, true);
     this.nodes.add(b3e.RepeatUntilFailure, true);
     this.nodes.add(b3e.RepeatUntilSuccess, true);
-    reg.register("RandomCondition", RandomCondition) // Add
-    reg.register("StateCondition", StateCondition) // Add
-    reg.register("ContinuousStateCondition", ContinuousStateCondition) // Add
+    this.nodes.add(b3e.StateCondition, true);
+    this.nodes.add(b3e.ContinuousStateCondition, true);
     //this.nodes.add(b3e.MaxTime, true);
     this.nodes.add(b3e.Inverter, true);
     this.nodes.add(b3e.AlwaysSucceed, true);
@@ -45,6 +44,7 @@
     //this.nodes.add(b3e.Limiter, true);
     this.nodes.add(b3e.Failer, true);
     this.nodes.add(b3e.Succeeder, true);
+    this.nodes.add(b3e.RandomOutcome, true);
     this.nodes.add(b3e.Runner, true);
     this.nodes.add(b3e.Wait, true);
     //this.nodes.add(b3e.Error, true);

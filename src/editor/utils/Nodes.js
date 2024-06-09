@@ -11,9 +11,9 @@ b3e.Root = {
 b3e.Random = {
   name: "Random",
   category: "composite",
-  title: "Random",
+  title: "Run Random",
   icon: { className: "fas fa-dice" },
-  description: "Randomly picks one of the child tasks and runs it."
+  description: "Randomly picks one of child tasks and runs it."
 };
 
 b3e.AlwaysSucceed = {
@@ -21,7 +21,7 @@ b3e.AlwaysSucceed = {
   category: "decorator",
   title: "Always Succeed",
   icon: { className: "fas fa-check" },
-  description: "When the child task finishes - will return success, no matter what value the child task returned."
+  description: "When a child task finishes - will return success, no matter what value child task returned."
 };
 
 b3e.AlwaysFail = {
@@ -29,7 +29,25 @@ b3e.AlwaysFail = {
   category: "decorator",
   title: "Always Fail",
   icon: { className: "fas fa-times" },
-  description: "When the child task finishes - will return failure, no matter what value the child task returned."
+  description: "When a child task finishes - will return failure, no matter what value child task returned."
+};
+
+b3e.StateCondition = {
+  name: "StateCondition",
+  category: "decorator",
+  title: "State Condition",
+  icon: { className: "fas fa-times" },
+  description: "Runs a child node only if condition is met. Condition field can refer to a state values using '$' sign, example: 'condition: $range < 100'. Condition is checked only once when this decorator is reached, it will not abort if condition outcome is changed while the child is still running."
+};
+
+
+
+b3e.ContinuousStateCondition = {
+  name: "ContinuousStateCondition",
+  category: "decorator",
+  title: "Continuous State Condition",
+  icon: { className: "fas fa-times" },
+  description: "Runs a child node only if condition is met. Condition field can refer to a state values using '$' sign, example: 'condition: $range < 100'. Condition is checked every frame, it will abort if condition outcome is changed while the child is still running."
 };
 
 b3e.Cooldown = {
@@ -37,8 +55,17 @@ b3e.Cooldown = {
   category: "decorator",
   title: "Cooldown",
   icon: { className: "fas fa-hourglass-half" },
-  description: "Will run the child task only once in specified amount of time ('milliseconds' parameter)",
-  properties: { "milliseconds": 0 }
+  description: "Will run a child task only once in specified amount of time ('milliseconds' parameter)",
+  properties: { milliseconds: 0 }
+};
+
+b3e.RandomOutcome = {
+  name: "RandomOutcome",
+  category: "action",
+  title: "Random Outcome",
+  icon: { className: "fas fa-dice-5" },
+  description: "This task will succeed or fail randomly based on the given probability of success ('probability' parameter, 0 - 100 range).",
+  properties: { probability: 50 }
 };
 
 
@@ -61,17 +88,17 @@ b3e.MemPriority = $.extend(b3.MemPriority.prototype, {
 });
 b3e.Repeater = $.extend(b3.Repeater.prototype, {
   icon: { className: "fas fa-redo" },
-  description: "Repeats the child task specified amount of time ('maxLoop' parameter, -1 = no limit).",
+  description: "Repeats a child task specified amount of time ('maxLoop' parameter, -1 = no limit).",
   properties: { "maxLoop": -1 }
 });
 b3e.RepeatUntilFailure = $.extend(b3.RepeatUntilFailure.prototype, {
   icon: { className: "fas fa-redo" },
-  description: "Repeats the child task specified amount of time ('maxLoop' parameter, -1 = no limit). Will stop after the first child task failure.",
+  description: "Repeats a child task specified amount of time ('maxLoop' parameter, -1 = no limit). Will stop after the first child task failure.",
   properties: { "maxLoop": -1 }
 });
 b3e.RepeatUntilSuccess = $.extend(b3.RepeatUntilSuccess.prototype, {
   icon: { className: "fas fa-redo" },
-  description: "Repeats the child task specified amount of time ('maxLoop' parameter, -1 = no limit). Will stop after the first child task success.",
+  description: "Repeats a child task specified amount of time ('maxLoop' parameter, -1 = no limit). Will stop after the first child task success.",
   properties: { "maxLoop": -1 }
 });
 b3e.MaxTime = $.extend(b3.MaxTime.prototype, {
@@ -79,7 +106,7 @@ b3e.MaxTime = $.extend(b3.MaxTime.prototype, {
 });
 b3e.Inverter = $.extend(b3.Inverter.prototype, {
   icon: { className: "fas fa-yin-yang" },
-  description: "Inverts the result of the child node. If the child node returns success this decorator will return failure and vice versa.",
+  description: "Inverts the result of a child node. If a child node returns success this decorator will return failure and vice versa.",
 });
 b3e.Limiter = $.extend(b3.Limiter.prototype, {
   icon: { className: "fas fa-stop-circle" },
