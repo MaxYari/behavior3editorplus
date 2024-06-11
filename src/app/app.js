@@ -59,7 +59,7 @@ angular.module('app', [
           if (projects.length > 0 && projects[0].isOpen) {
             projectModel
               .openProject(projects[0].path)
-              .then(closePreload, closePreload)
+              .then(closePreload, closePreload);
           } else {
             closePreload();
           }

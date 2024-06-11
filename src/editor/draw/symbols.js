@@ -161,7 +161,9 @@
     }
 
     // Define font sizes
+    // Maybe do text wrapping as well for the title
     var titleFontSize = '16px'; // Font size for the title
+    if (titleContent.length > 15) titleFontSize = "14px";
     var fieldValueFontSize = '12px'; // Font size for the field-value pairs
 
     // Add svg icon

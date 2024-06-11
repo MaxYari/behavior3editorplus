@@ -74,7 +74,7 @@
     function _create() {
       Mousetrap.bind('ctrl+q', _shortcut_projectclose);
       Mousetrap.bind('ctrl+s', _shortcut_projectsave);
-      Mousetrap.bind('ctrl+e', onExportTreeJson);
+      Mousetrap.bind('ctrl+e', onExportProjectJson);
       Mousetrap.bind('ctrl+z', onUndo);
       Mousetrap.bind('ctrl+shift+z', onRedo);
       Mousetrap.bind('ctrl+c', onCopy);

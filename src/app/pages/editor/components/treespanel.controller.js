@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -12,18 +12,18 @@
     'notificationService'
   ];
 
-  function TreespanelController($scope, 
-                                $window,
-                                dialogService,
-                                notificationService) {
+  function TreespanelController($scope,
+    $window,
+    dialogService,
+    notificationService) {
 
     // HEAD //
     var vm = this;
-    vm.trees   = null;
+    vm.trees = null;
     vm.newTree = newTree;
-    vm.select  = select;
-    vm.remove  = remove;
-    
+    vm.select = select;
+    vm.remove = remove;
+
     _create();
     _activate();
     $scope.$on('$destroy', _destroy);
@@ -34,20 +34,20 @@
 
       var p = $window.editor.project.get();
       var selected = p.trees.getSelected();
-      p.trees.each(function(tree) {
+      p.trees.each(function (tree) {
         var root = tree.blocks.getRoot();
         vm.trees.push({
-          'id'       : tree._id,
-          'name'     : root.title || 'A behavior tree',
-          'active'   : tree===selected,
+          'id': tree._id,
+          'name': root.title || 'A behavior tree',
+          'active': tree === selected,
         });
       });
     }
 
     function _event(e) {
       if (e.type !== 'blockchanged' || e._target.category === 'root') {
-        if (!$scope.$$phase) { 
-          $scope.$apply(function() { _activate(); });
+        if (!$scope.$$phase) {
+          $scope.$apply(function () { _activate(); });
         } else {
           _activate();
         }
@@ -81,9 +81,9 @@
     function remove(id) {
       dialogService.
         confirm(
-          'Remove tree?', 
+          'Remove tree?',
           'Are you sure you want to remove this tree?\n\nNote: all blocks using this tree will be removed.'
-        ).then(function() {
+        ).then(function () {
           var p = $window.editor.project.get();
           p.trees.remove(id);
           notificationService.success(

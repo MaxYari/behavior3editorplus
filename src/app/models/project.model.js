@@ -134,7 +134,6 @@
           _setProject(project);
           resolve();
         } catch (e) {
-          debugger;
           console.error(e);
           reject(e);
         }

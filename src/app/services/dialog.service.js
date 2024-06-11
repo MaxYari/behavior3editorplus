@@ -6,18 +6,18 @@ dialogService.$inject = ['$window', '$q', '$document', 'nodejsService'];
 
 function dialogService($window, $q, $document, nodejsService) {
   var service = {
-    alert         : alert,
-    confirm       : confirm,
-    prompt        : prompt,
-    saveAs        : saveAs,
-    openFile      : openFile,
-    openDirectory : openDirectory
+    alert: alert,
+    confirm: confirm,
+    prompt: prompt,
+    saveAs: saveAs,
+    openFile: openFile,
+    openDirectory: openDirectory
   };
   return service;
 
   function _callFileDialog(dialog) {
-    return $q(function(resolve) {
-      dialog.addEventListener('change', function() {
+    return $q(function (resolve) {
+      dialog.addEventListener('change', function () {
         resolve(dialog.value);
       });
       dialog.click();
@@ -31,7 +31,7 @@ function dialogService($window, $q, $document, nodejsService) {
     options.type = type;
     options.customClass = type;
 
-    return $q(function(resolve) { swal(options, function() { resolve(); }); });
+    return $q(function (resolve) { swal(options, function () { resolve(); }); });
   }
   function confirm(title, text, type, options) {
     options = options || {};
@@ -41,8 +41,8 @@ function dialogService($window, $q, $document, nodejsService) {
     options.customClass = type;
     options.showCancelButton = true;
 
-    return $q(function(resolve, reject) {
-      $window.swal(options, function(ok) {
+    return $q(function (resolve, reject) {
+      $window.swal(options, function (ok) {
         if (ok) {
           resolve();
         } else {
@@ -60,9 +60,9 @@ function dialogService($window, $q, $document, nodejsService) {
     options.customClass = type;
     options.showCancelButton = true;
 
-    return $q(function(resolve, reject) {
-      swal(options, function(val) { 
-        if (val!==false) {
+    return $q(function (resolve, reject) {
+      swal(options, function (val) {
+        if (val !== false) {
           resolve(val);
         } else {
           reject(val);
@@ -71,13 +71,13 @@ function dialogService($window, $q, $document, nodejsService) {
     });
   }
   function saveAs(placeholder, types) {
-    return $q(function(resolve, reject) {
+    return $q(function (resolve, reject) {
       var value = nodejsService.dialog.showSaveDialog({
         title: 'Save project as...',
-        defaultPath: placeholder + '.b3',
-        filters : [
-          {name: 'Behavior3 File', extensions: ['b3', 'json']},
-          {name: 'All Files', extensions: ['*']}
+        defaultPath: placeholder + '.json',
+        filters: [
+          { name: 'Behavior3 File', extensions: ['b3', 'json'] },
+          { name: 'All Files', extensions: ['*'] }
         ]
       });
       if (value) {
@@ -88,14 +88,14 @@ function dialogService($window, $q, $document, nodejsService) {
     });
   }
   function openFile(multiple, types) {
-    return $q(function(resolve, reject) {
+    return $q(function (resolve, reject) {
       var value = nodejsService.dialog.showOpenDialog({
         title: 'Open file...',
         multiSelections: multiple,
         properties: ['openFile'],
-        filters : [
-          {name: 'Behavior3 File', extensions: ['b3', 'json']},
-          {name: 'All Files', extensions: ['*']}
+        filters: [
+          { name: 'Behavior3 File', extensions: ['b3', 'json'] },
+          { name: 'All Files', extensions: ['*'] }
         ]
       });
 
@@ -111,7 +111,7 @@ function dialogService($window, $q, $document, nodejsService) {
     });
   }
   function openDirectory() {
-    return $q(function(resolve, reject) {
+    return $q(function (resolve, reject) {
       var value = nodejsService.dialog.showOpenDialog({
         title: 'Open directory...',
         properties: ['openDirectory']
@@ -123,5 +123,5 @@ function dialogService($window, $q, $document, nodejsService) {
       }
     });
   }
-  
+
 }
