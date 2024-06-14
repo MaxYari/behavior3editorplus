@@ -35,8 +35,9 @@
     this.nodes.add(b3e.RepeatUntilFailure, true);
     this.nodes.add(b3e.RepeatUntilSuccess, true);
     this.nodes.add(b3e.StateCondition, true);
+    this.nodes.add(b3e.StateInterrupt, true);
     this.nodes.add(b3e.ContinuousStateCondition, true);
-    this.nodes.add(b3e.LimitRuntime, true)
+    this.nodes.add(b3e.LimitRuntime, true);
     //this.nodes.add(b3e.MaxTime, true);
     this.nodes.add(b3e.Inverter, true);
     this.nodes.add(b3e.AlwaysSucceed, true);

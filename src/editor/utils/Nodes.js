@@ -41,9 +41,18 @@ b3e.StateCondition = {
   properties: { condition: "" }
 };
 
+b3e.StateInterrupt = {
+  name: "StateInterrupt",
+  category: "interrupt",
+  title: "State Interrupt",
+  icon: { className: "fas fa-fast-forward" },
+  description: "Interrupts a neighbouring branch condition is true. Won't interrupt again until finished.",
+  properties: { condition: "" }
+};
+
 b3e.ContinuousStateCondition = {
   name: "ContinuousStateCondition",
-  category: "decorator",
+  category: "interrupt",
   title: "Cont. State Condition",
   icon: { className: "far fa-question-circle" },
   description: "Continuous condition node runs a child node only if condition is met. Condition field can refer to a state values using '$' sign, example: 'condition: $range < 100'. Condition is checked every frame, it will abort if condition outcome is changed while the child is still running.",

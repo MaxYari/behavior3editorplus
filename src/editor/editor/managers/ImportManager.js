@@ -1,7 +1,7 @@
-b3e.editor.ImportManager = function(editor) {
+b3e.editor.ImportManager = function (editor) {
   "use strict";
 
-  this.projectAsData = function(data) {
+  this.projectAsData = function (data) {
     var project = editor.project.get();
     if (!project) return;
 
@@ -13,7 +13,7 @@ b3e.editor.ImportManager = function(editor) {
     editor.trigger('projectimported');
   };
 
-  this.treeAsData = function(data) {
+  this.treeAsData = function (data) {
     var project = editor.project.get();
     if (!project) return;
 
@@ -22,19 +22,19 @@ b3e.editor.ImportManager = function(editor) {
     var first = null;
 
     // Tree data
-    var display      = data.display||{};
-    tree.x           = display.camera_x || 0;
-    tree.y           = display.camera_y || 0;
-    tree.scaleX      = display.camera_z || 1;
-    tree.scaleY      = display.camera_z || 1;
+    var display = data.display || {};
+    tree.x = display.camera_x || 0;
+    tree.y = display.camera_y || 0;
+    tree.scaleX = display.camera_z || 1;
+    tree.scaleY = display.camera_z || 1;
     var treeNode = project.nodes.get(tree._id);
     treeNode.title = data.title;
 
-    root.title       = data.title;
+    root.title = data.title;
     root.description = data.description;
-    root.properties  = data.properties;
-    root.x           = display.x || 0;
-    root.y           = display.y || 0;
+    root.properties = data.properties;
+    root.x = display.x || 0;
+    root.y = display.y || 0;
 
     // Custom nodes
     if (data.custom_nodes) this.nodesAsData(data.custom_nodes);
@@ -53,7 +53,7 @@ b3e.editor.ImportManager = function(editor) {
       block.description = spec.description;
       block.properties = tine.merge({}, block.properties, spec.properties);
       block._redraw();
-      
+
       if (spec.id === data.root) {
         first = block;
       }
@@ -65,16 +65,16 @@ b3e.editor.ImportManager = function(editor) {
       var inBlock = tree.blocks.get(id);
 
       var children = null;
-      if (inBlock.category === 'composite' && spec.children) {
+      if (inBlock.category === b3e.COMPOSITE && spec.children) {
         children = spec.children;
       }
-      else if (spec.child && (inBlock.category == 'decorator' ||
-                              inBlock.category == 'root')) {
+      else if (spec.child && (inBlock.category == b3e.DECORATOR ||
+        inBlock.category == b3e.ROOT || inBlock.category === b3e.INTERRUPT)) {
         children = [spec.child];
       }
-      
+
       if (children) {
-        for (var i=0; i<children.length; i++) {
+        for (var i = 0; i < children.length; i++) {
           var outBlock = tree.blocks.get(children[i]);
           tree.connections.add(inBlock, outBlock);
         }
@@ -97,21 +97,21 @@ b3e.editor.ImportManager = function(editor) {
     editor.trigger('treeimported');
   };
 
-  this.treesAsData = function(data) {
-    for (var i=0; i<data.length; i++) {
+  this.treesAsData = function (data) {
+    for (var i = 0; i < data.length; i++) {
       this.treeAsData(data[i]);
     }
   };
 
-  this.nodesAsData = function(data) {
+  this.nodesAsData = function (data) {
     var project = editor.project.get();
     if (!project) return;
 
-    for (var i=0; i<data.length; i++) {
+    for (var i = 0; i < data.length; i++) {
       var template = data[i];
       project.nodes.add(template);
     }
     editor.trigger('nodeimported');
   };
-  this._applySettings = function(settings) {};
+  this._applySettings = function (settings) { };
 };

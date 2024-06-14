@@ -71,6 +71,7 @@
     this._displaySymbol = symbol(this, this._settings);
     this._displayShape.graphics.clear();
     this._displayShape = shape(this, this._settings);
+    this._displaySymbol.mask = this._displayShape;
 
     this.addChild(this._displayShape);
     this.addChild(this._displaySymbol);

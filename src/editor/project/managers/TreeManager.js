@@ -72,8 +72,8 @@ b3e.project.TreeManager = function (editor, project) {
     if (!tree || project.getChildIndex(tree) < 0) return;
 
     // Always select the tree node upon a tree switch, makes it more intuitive to edit the tree name
-    tree.selection.deselectAll()
-    tree.selection.select(tree.blocks.getRoot())
+    tree.selection.deselectAll();
+    tree.selection.select(tree.blocks.getRoot());
 
     if (project._selectedTree === tree) return;
     if (project._selectedTree) {

@@ -31,12 +31,11 @@
     // BODY //
     function _activate() {
       vm.trees = [];
-      vm.nodes = {
-        composite: [],
-        decorator: [],
-        action: [],
-        condition: [],
-      };
+      vm.nodes = {};
+      vm.nodes[b3e.COMPOSITE] = [];
+      vm.nodes[b3e.DECORATOR] = [];
+      vm.nodes[b3e.INTERRUPT] = [];
+      vm.nodes[b3e.ACTION] = [];
 
       var p = $window.editor.project.get();
       p.nodes.each(function (node) {

@@ -1,12 +1,12 @@
-b3e.editor.ConnectionSystem = function(editor) {
+b3e.editor.ConnectionSystem = function (editor) {
   "use strict";
 
   var connection = null;
   var lastOutBlock = null;
 
-  this.update = function(delta) {};
+  this.update = function (delta) { };
 
-  this.onMouseDown = function(e) {
+  this.onMouseDown = function (e) {
     if (e.nativeEvent.which !== 1) return;
 
     var project = editor.project.get();
@@ -31,7 +31,7 @@ b3e.editor.ConnectionSystem = function(editor) {
       // if user clicked at the inAnchor
       var c = block._inConnection;
       if (!c)
-          return;
+        return;
 
       block._inConnection = null;
       c._outBlock = null;
@@ -41,7 +41,7 @@ b3e.editor.ConnectionSystem = function(editor) {
     }
   };
 
-  this.onMouseMove = function(e) {
+  this.onMouseMove = function (e) {
     // if no connection, return
     if (!connection) return;
 
@@ -59,7 +59,7 @@ b3e.editor.ConnectionSystem = function(editor) {
     connection._redraw(null, null, x, y);
   };
 
-  this.onMouseUp = function(e) {
+  this.onMouseUp = function (e) {
     if (e.nativeEvent.which !== 1) return;
 
     // if no connection, return
@@ -97,9 +97,9 @@ b3e.editor.ConnectionSystem = function(editor) {
       }
 
       // if double children on root
-      if ((connection._inBlock.category === 'root' ||
-           connection._inBlock.category === 'decorator') &&
-           connection._inBlock._outConnections.length > 1) {
+      if ((connection._inBlock.category === b3e.ROOT ||
+        connection._inBlock.category === b3e.DECORATOR || connection._inBlock.category === b3e.INTERRUPT) &&
+        connection._inBlock._outConnections.length > 1) {
 
         c = connection._inBlock._outConnections[0];
         tree.connections.remove(c);

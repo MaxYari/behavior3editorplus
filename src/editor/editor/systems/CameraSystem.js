@@ -1,11 +1,11 @@
-b3e.editor.CameraSystem = function(editor) {
+b3e.editor.CameraSystem = function (editor) {
   "use strict";
 
   var isDragging = false;
   var offsetX = 0;
   var offsetY = 0;
 
-  this.update = function(delta) {
+  this.update = function (delta) {
     var project = editor.project.get();
     if (!project) return;
 
@@ -38,7 +38,7 @@ b3e.editor.CameraSystem = function(editor) {
     }
   };
 
-  this.onMouseDown = function(e) {
+  this.onMouseDown = function (e) {
     if (e.nativeEvent.which !== 2) return;
 
     var project = editor.project.get();
@@ -53,7 +53,7 @@ b3e.editor.CameraSystem = function(editor) {
     offsetX = editor._game.mouse.x - tree.x;
     offsetY = editor._game.mouse.y - tree.y;
   };
-  this.onMouseMove = function(e) {
+  this.onMouseMove = function (e) {
     if (!isDragging) return;
 
     var project = editor.project.get();
@@ -65,7 +65,7 @@ b3e.editor.CameraSystem = function(editor) {
     tree.x = editor._game.mouse.x - offsetX;
     tree.y = editor._game.mouse.y - offsetY;
   };
-  this.onMouseUp = function(e) {
+  this.onMouseUp = function (e) {
     if (e.nativeEvent.which !== 2) return;
 
     var project = editor.project.get();
@@ -80,20 +80,20 @@ b3e.editor.CameraSystem = function(editor) {
     offsetX = 0;
     offsetY = 0;
   };
-  this.onMouseWheel = function(e) {
+  this.onMouseWheel = function (e) {
     var project = editor.project.get();
     if (!project) return;
 
     var tree = project.trees.getSelected();
     if (!tree) return;
 
-    if (e.ctrlKey) {
-      if ((e.wheelDeltaY||e.deltaY) > 0) {
-        tree.view.zoomIn();
-      } else {
-        tree.view.zoomOut();
-      }
+    //if (e.ctrlKey) {
+    if ((e.wheelDeltaY || e.deltaY) > 0) {
+      tree.view.zoomIn();
+    } else {
+      tree.view.zoomOut();
     }
+    //}
   };
 
 
@@ -101,13 +101,13 @@ b3e.editor.CameraSystem = function(editor) {
   editor._game.stage.on('stagemousedown', this.onMouseDown, this);
   editor._game.stage.on('stagemousemove', this.onMouseMove, this);
   editor._game.stage.on('stagemouseup', this.onMouseUp, this);
-  editor._game.canvas.addEventListener('wheel', function(e) {
+  editor._game.canvas.addEventListener('wheel', function (e) {
     self.onMouseWheel(e);
   }, false);
-  editor._game.canvas.addEventListener('mousewheel', function(e) {
+  editor._game.canvas.addEventListener('mousewheel', function (e) {
     self.onMouseWheel(e);
   }, false);
-  editor._game.canvas.addEventListener('DOMMouseScroll ', function(e) {
+  editor._game.canvas.addEventListener('DOMMouseScroll ', function (e) {
     self.onMouseWheel(e);
   }, false);
 };

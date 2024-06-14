@@ -1,6 +1,26 @@
 (function () {
   "use strict";
 
+  var etchaSketch = function (x, y) {
+    var start = null;
+    var lastPoint = null;
+
+    start = { x: x, y: y };
+    shape.graphics.moveTo(x, y);
+    lastPoint = start;
+
+    return {
+      draw: function (x, y) {
+        var newPoint = { x: lastPoint.x + x, y: lastPoint.y + y };
+        shape.graphics.lineTo(newPoint.x, newPoint.y);
+        lastPoint = newPoint;
+      },
+      close: function () {
+        this.draw(start.x, start.y);
+      }
+    };
+  };
+
   var makeAnchor = function (shape, x, y, radius, bg_color, border_width, border_color) {
     shape.graphics.beginFill(bg_color);
     shape.graphics.setStrokeStyle(border_width, 'round');
@@ -56,6 +76,7 @@
     shape.graphics.endFill();
   };
 
+
   b3e.draw.rootShape = function (block, settings) {
     var w = block._width;
     var h = block._height;
@@ -84,11 +105,12 @@
     return shape;
   };
 
+
   b3e.draw.compositeShape = function (block, settings) {
     var bounds = block._displaySymbol.getBounds();
     var _width = 0;
 
-    if (bounds) { _width = bounds.width + 20; }
+    if (bounds) { _width = bounds.width + 60; }
 
     var w = Math.max(_width, block._width);
     var h = block._height;
@@ -116,7 +138,7 @@
       settings.get('anchor_border_width'),
       settings.get('block_border_color')
     );
-    makeRect(shape, w, h, 15,
+    makeRect(shape, w, h, 10,
       settings.get('composite_color'),
       settings.get('block_border_width'),
       settings.get('block_border_color')
@@ -124,10 +146,11 @@
     return shape;
   };
 
+
   b3e.draw.decoratorShape = function (block, settings) {
     var bounds = block._displaySymbol.getBounds();
 
-    var w = Math.max(bounds.width + 40, block._width); // Keeping the original width calculation
+    var w = Math.max(bounds.width + 80, block._width); // Keeping the original width calculation
     var h = Math.max(bounds.height + 25, block._height);
     var anchorOffsetX = settings.get('anchor_offset_x');
     var shape = block._displayShape;
@@ -179,15 +202,67 @@
   };
 
 
+  b3e.draw.interruptShape = function (block, settings) {
+    var bounds = block._displaySymbol.getBounds();
 
+    var w = Math.max(bounds.width + 80, block._width); // Keeping the original width calculation
+    var h = Math.max(bounds.height + 25, block._height);
+    var anchorOffsetX = settings.get('anchor_offset_x');
+    var shape = block._displayShape;
+    block._width = w;
+    block._height = h;
 
+    var x = 0;
+    var y = 0;
+    if (settings.get('layout') === 'horizontal') {
+      x = w / 2 + anchorOffsetX;
+    } else {
+      y = h / 2 + anchorOffsetX;
+    }
+    makeAnchor(shape, x, y,
+      settings.get('anchor_radius'),
+      settings.get('interrupt_color'),
+      settings.get('anchor_border_width'),
+      settings.get('block_border_color')
+    );
+    makeAnchor(shape, -x, -y,
+      settings.get('anchor_radius'),
+      settings.get('interrupt_color'),
+      settings.get('anchor_border_width'),
+      settings.get('block_border_color')
+    );
 
+    // Fixed width for right and left sides of the hexagon
+    var fixedSideWidth = Math.min(25, w / 3);
+    var centralWidth = w - 2 * fixedSideWidth; // width of the central part of the hexagon
+    var halfHeight = h / 2; // half of the height of the hexagon
+
+    shape.graphics.beginFill(settings.get('interrupt_color'));
+    shape.graphics.setStrokeStyle(settings.get('block_border_width'), 'round');
+    shape.graphics.beginStroke(settings.get('block_border_color'));
+
+    //var etch = etchaSketch(-centralWidth / 2 - fixedSideWidth, 0);
+
+    // Drawing the hexagon with fixed sides
+    shape.graphics.moveTo(-centralWidth / 2 - fixedSideWidth, 0);
+    shape.graphics.lineTo(-centralWidth / 2, -halfHeight);
+    shape.graphics.lineTo(centralWidth / 2, -halfHeight);
+    shape.graphics.lineTo(centralWidth / 2 + fixedSideWidth, 0);
+    shape.graphics.lineTo(centralWidth / 2, halfHeight);
+    shape.graphics.lineTo(-centralWidth / 2, halfHeight);
+    shape.graphics.lineTo(-centralWidth / 2 - fixedSideWidth, 0);
+
+    shape.graphics.endStroke();
+    shape.graphics.endFill();
+
+    return shape;
+  };
 
 
   b3e.draw.actionShape = function (block, settings) {
 
     var bounds = block._displaySymbol.getBounds();
-    var w = Math.max(bounds.width + 15, block._width);
+    var w = Math.max(bounds.width + 60, block._width);
     var h = Math.max(bounds.height + 15, block._height);
     var anchorOffsetX = settings.get('anchor_offset_x');
     var shape = block._displayShape;
@@ -207,7 +282,7 @@
       settings.get('anchor_border_width'),
       settings.get('block_border_color')
     );
-    makeRect(shape, w, h, 15,
+    makeRect(shape, w, h, Math.min(w / 2, h / 2),
       settings.get('action_color'),
       settings.get('block_border_width'),
       settings.get('block_border_color')
@@ -274,6 +349,7 @@
     'tree': b3e.draw.treeShape,
     'composite': b3e.draw.compositeShape,
     'decorator': b3e.draw.decoratorShape,
+    'interrupt': b3e.draw.interruptShape,
     'action': b3e.draw.actionShape,
     'condition': b3e.draw.conditionShape,
   };
