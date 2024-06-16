@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  var etchaSketch = function (x, y) {
+  var continuousDrawer = function (x, y, shape) {
     var start = null;
     var lastPoint = null;
 
@@ -16,7 +16,7 @@
         lastPoint = newPoint;
       },
       close: function () {
-        this.draw(start.x, start.y);
+        shape.graphics.lineTo(start.x, start.y);
       }
     };
   };
@@ -236,21 +236,29 @@
     var fixedSideWidth = Math.min(25, w / 3);
     var centralWidth = w - 2 * fixedSideWidth; // width of the central part of the hexagon
     var halfHeight = h / 2; // half of the height of the hexagon
+    var dipHeight = halfHeight / 2;
+    var predipWidth = fixedSideWidth * 0.25;
+    var postdipWidth = fixedSideWidth - predipWidth;
 
     shape.graphics.beginFill(settings.get('interrupt_color'));
     shape.graphics.setStrokeStyle(settings.get('block_border_width'), 'round');
     shape.graphics.beginStroke(settings.get('block_border_color'));
 
-    //var etch = etchaSketch(-centralWidth / 2 - fixedSideWidth, 0);
+    var drawer = continuousDrawer(-centralWidth / 2 - fixedSideWidth, 0, shape);
 
     // Drawing the hexagon with fixed sides
-    shape.graphics.moveTo(-centralWidth / 2 - fixedSideWidth, 0);
-    shape.graphics.lineTo(-centralWidth / 2, -halfHeight);
-    shape.graphics.lineTo(centralWidth / 2, -halfHeight);
-    shape.graphics.lineTo(centralWidth / 2 + fixedSideWidth, 0);
-    shape.graphics.lineTo(centralWidth / 2, halfHeight);
-    shape.graphics.lineTo(-centralWidth / 2, halfHeight);
-    shape.graphics.lineTo(-centralWidth / 2 - fixedSideWidth, 0);
+
+    drawer.draw(postdipWidth, dipHeight)
+    drawer.draw(predipWidth, dipHeight)
+    drawer.draw(centralWidth, 0)
+    drawer.draw(predipWidth, -dipHeight)
+    drawer.draw(postdipWidth, -dipHeight)
+    drawer.draw(-postdipWidth, -dipHeight)
+    drawer.draw(-predipWidth, -dipHeight)
+    drawer.draw(-centralWidth, 0)
+    drawer.draw(-predipWidth, dipHeight)
+    drawer.close()
+
 
     shape.graphics.endStroke();
     shape.graphics.endFill();

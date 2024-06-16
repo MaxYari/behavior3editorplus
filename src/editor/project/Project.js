@@ -37,16 +37,18 @@
     this.nodes.add(b3e.StateCondition, true);
     this.nodes.add(b3e.StateInterrupt, true);
     this.nodes.add(b3e.ContinuousStateCondition, true);
-    this.nodes.add(b3e.LimitRuntime, true);
+    this.nodes.add(b3e.LimitRunTime, true);
     //this.nodes.add(b3e.MaxTime, true);
+    this.nodes.add(b3e.RunTimeOutcome, true);
+    this.nodes.add(b3e.Cooldown, true);
     this.nodes.add(b3e.Inverter, true);
     this.nodes.add(b3e.AlwaysSucceed, true);
     this.nodes.add(b3e.AlwaysFail, true);
-    this.nodes.add(b3e.Cooldown, true);
+
     //this.nodes.add(b3e.Limiter, true);
     this.nodes.add(b3e.Failer, true);
     this.nodes.add(b3e.Succeeder, true);
-    this.nodes.add(b3e.RandomOutcome, true);
+    this.nodes.add(b3e.RandomSuccess, true);
     this.nodes.add(b3e.Runner, true);
     this.nodes.add(b3e.Wait, true);
     //this.nodes.add(b3e.Error, true);

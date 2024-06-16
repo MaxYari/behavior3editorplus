@@ -43,12 +43,10 @@
 
         var list = vm.nodes[node.category];
         if (!list) return;
-        list.push({
-          name: node.name,
-          title: _getTitle(node),
-          icon: node.icon,
-          isDefault: node.isDefault
-        });
+
+        var nodeCopy = b3e.Node.copyNodeObj(node);
+        nodeCopy.title = node.title || node.name;
+        list.push(nodeCopy);
       });
 
       var selected = p.trees.getSelected();

@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -9,13 +9,13 @@
   keytable.$inject = ['$parse'];
   function keytable($parse) {
     var directive = {
-      require          : '^ngModel',
-      restrict         : 'EA',
-      replace          : true,
-      bindToController : true,
-      controller       : 'KeyTableController',
-      controllerAs     : 'keytable',
-      templateUrl      : 'directives/keytable.html',
+      require: '^ngModel',
+      restrict: 'EA',
+      replace: true,
+      bindToController: true,
+      controller: 'KeyTableController',
+      controllerAs: 'keytable',
+      templateUrl: 'directives/keytable.html',
       link: link
     };
     return directive;
@@ -26,7 +26,7 @@
       scope.keytable._onChange = $parse(attrs.ngChange);
 
       var variable = attrs.ngModel;
-      scope.$watch(variable, function(model) {
+      scope.$watch(variable, function (model) {
         scope.keytable.reset(model);
       });
     }
@@ -37,15 +37,15 @@
     // HEAD //
     var vm = this;
     vm._onChange = null;
-    vm.model  = $scope.keytable.model || $scope.model || null;
-    vm.rows   = [];
-    vm.add    = add;
+    vm.model = $scope.keytable.model || $scope.model || null;
+    vm.rows = [];
+    vm.add = add;
     vm.remove = remove;
     vm.change = change;
-    vm.reset  = reset;
+    vm.reset = reset;
 
     _activate();
-    
+
     // BODY //
     function _activate() {
       if (vm.model) {
@@ -64,22 +64,23 @@
     }
 
     function add(key, value, fixed) {
-      vm.rows.push({key:key, value:value, fixed:fixed===true});
+      vm.rows.push({ key: key, value: value, fixed: fixed === true });
     }
 
     function remove(i) {
       vm.rows.splice(i, 1);
+      change();
     }
 
     function change() {
-      for (var key in vm.model){
-        if (vm.model.hasOwnProperty(key)){
+      for (var key in vm.model) {
+        if (vm.model.hasOwnProperty(key)) {
           delete vm.model[key];
         }
       }
-      for (var i=0; i<vm.rows.length; i++) {
+      for (var i = 0; i < vm.rows.length; i++) {
         var r = vm.rows[i];
-        if (! r.key) continue;
+        if (!r.key) continue;
 
         var value = r.value;
         if (!isNaN(value) && value !== '') {
@@ -87,7 +88,7 @@
         }
 
         vm.model[r.key] = value;
-        
+
         if (vm._onChange) {
           vm._onChange($scope);
         }

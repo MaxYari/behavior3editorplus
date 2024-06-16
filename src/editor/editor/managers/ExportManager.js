@@ -113,16 +113,10 @@ b3e.editor.ExportManager = function (editor) {
     var data = [];
     project.nodes.each(function (node) {
       if (!node.isDefault) {
-        data.push({
-          version: b3e.VERSION,
-          scope: 'node',
-          name: node.name,
-          icon: node.icon,
-          category: node.category,
-          title: node.title,
-          description: node.description,
-          properties: node.properties,
-        });
+        var nodeCopy = b3e.Node.copyNodeObj(node);
+        nodeCopy.version = b3e.VERSION;
+        nodeCopy.scope = 'node';
+        data.push(nodeCopy);
       }
     });
 

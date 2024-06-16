@@ -56,7 +56,8 @@
       <div ng-repeat="(category, nodes) in nodespanel.nodes" class="node-list-category">
         <div ng-click="" class="node-list-title" ng-bind="category+'s'"></div>
         <ul>
-          <li ng-repeat="node in nodes">
+          <li ng-repeat="node in nodes" tooltip-html-unsafe="{{node.description}}" tooltip-placement="right"
+            tooltip-append-to-body="true">
             <a class="edit btn btn-link btn-xs" style="display:none" onmouseover="this.style.display='inline-block';"
               onmouseout="this.style.display='none'" ng-hide="{{node.isDefault}}"
               ui-sref="editor.editnode({name:node.name})"><i class="fas fa-edit"></i> Edit</a>

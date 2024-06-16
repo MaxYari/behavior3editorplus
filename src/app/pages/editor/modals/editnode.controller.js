@@ -35,12 +35,12 @@
 
       if ($stateParams.name) {
         var node = p.nodes.get($stateParams.name);
-        vm.node = node.copy();
+        vm.node = b3e.Node.copyNodeObj(node);
         vm.original = node;
         vm.action = 'Update';
       } else {
         vm.node = new b3e.Node();
-        vm.node.category = 'composite';
+        vm.node.category = b3e.ACTION;
       }
 
 

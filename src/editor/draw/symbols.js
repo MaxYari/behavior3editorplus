@@ -6,7 +6,7 @@
 
     var svgDoc = parser.parseFromString(svgText, 'image/svg+xml');
     var elements = svgDoc.querySelectorAll('path');
-    for (let i = 0; i < elements.length; i++) {
+    for (var i = 0; i < elements.length; i++) {
       elements[i].setAttribute('fill', color); // Change 'fill' color
     }
     var serializer = new XMLSerializer();
@@ -210,18 +210,18 @@
           imgEl = imgEl.clone();
           imgEl.alpha = 1;
 
-          scale = 0.035
+          scale = 0.035;
           imgEl.scaleX = imgEl.scaleY = scale;
           height = imgEl.getBounds().height * scale;
           width = imgEl.getBounds().width * scale;
 
-          imgEl.x = 0
-          imgEl.x = -width - 5 // place at the beginning of title
-          imgEl.x -= Math.min(titleText.getMeasuredWidth(), 120) / 2
-          imgEl.y = -height / 2 + titleText.getMeasuredHeight() / 2
+          imgEl.x = 0;
+          imgEl.x = -width - 5; // place at the beginning of title
+          imgEl.x -= Math.min(titleText.getMeasuredWidth(), 120) / 2;
+          imgEl.y = -height / 2 + titleText.getMeasuredHeight() / 2;
 
           titleTextContainer.addChildAt(imgEl, 0);
-          titleTextContainer.x += width / 2
+          titleTextContainer.x += width / 2;
         });
       }
     }
@@ -233,10 +233,10 @@
       color
     );
     titleText.textAlign = 'center';
-    titleText.maxWidth = 120
+    titleText.maxWidth = 120;
 
     var titleTextContainer = new createjs.Container();
-    titleTextContainer.addChild(titleText)
+    titleTextContainer.addChild(titleText);
     titleTextContainer.y = 0;
 
 

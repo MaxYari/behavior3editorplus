@@ -16,12 +16,8 @@ b3e.project.NodeManager = function (editor, project) {
     }
 
     if (!(node instanceof b3e.Node)) {
-      var n = new b3e.Node(isDefault);
-      n.name = node.name;
-      n.category = node.category;
-      n.title = node.title;
-      n.icon = node.icon || {};
-      n.description = node.description;
+      var n = b3e.Node.copyNodeObj(node);
+      n.isDefault = isDefault;
       n.properties = tine.merge({}, node.properties || node.parameters);
 
       node = n;
@@ -56,43 +52,11 @@ b3e.project.NodeManager = function (editor, project) {
 
     if (node.name !== template.name && this.get(template.name)) return false;
 
+    var _oldValues = b3e.Node.copyNodeObj(node);
 
-    var _oldValues = {
-      name: node.name,
-      title: node.title,
-      icon: node.icon,
-      description: node.description,
-      category: node.category,
-      properties: node.properties,
-    };
+    b3e.Node.updateNodeObj(node, template);
 
-    if (typeof template.name !== 'undefined') {
-      node.name = template.name;
-    }
-    if (typeof template.title !== 'undefined') {
-      node.title = template.title;
-    }
-    if (typeof template.icon !== 'undefined') {
-      node.icon = template.icon;
-    }
-    if (typeof template.category !== 'undefined') {
-      node.category = template.category;
-    }
-    if (typeof template.description !== 'undefined') {
-      node.description = template.description;
-    }
-    if (typeof template.properties !== 'undefined') {
-      node.properties = tine.merge({}, template.properties);
-    }
-
-    var _newValues = {
-      name: node.name,
-      title: node.title,
-      icon: node.icon,
-      description: node.description,
-      category: node.category,
-      properties: node.properties,
-    };
+    var _newValues = b3e.Node.copyNodeObj(node);
 
     project.history._beginBatch();
 
