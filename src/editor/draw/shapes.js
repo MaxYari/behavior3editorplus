@@ -248,17 +248,16 @@
 
     // Drawing the hexagon with fixed sides
 
-    drawer.draw(postdipWidth, dipHeight)
-    drawer.draw(predipWidth, dipHeight)
-    drawer.draw(centralWidth, 0)
-    drawer.draw(predipWidth, -dipHeight)
-    drawer.draw(postdipWidth, -dipHeight)
-    drawer.draw(-postdipWidth, -dipHeight)
-    drawer.draw(-predipWidth, -dipHeight)
-    drawer.draw(-centralWidth, 0)
-    drawer.draw(-predipWidth, dipHeight)
-    drawer.close()
-
+    drawer.draw(postdipWidth, dipHeight);
+    drawer.draw(predipWidth, dipHeight);
+    drawer.draw(centralWidth, 0);
+    drawer.draw(predipWidth, -dipHeight);
+    drawer.draw(postdipWidth, -dipHeight);
+    drawer.draw(-postdipWidth, -dipHeight);
+    drawer.draw(-predipWidth, -dipHeight);
+    drawer.draw(-centralWidth, 0);
+    drawer.draw(-predipWidth, dipHeight);
+    drawer.close();
 
     shape.graphics.endStroke();
     shape.graphics.endFill();

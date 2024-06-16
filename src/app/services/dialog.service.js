@@ -72,7 +72,7 @@ function dialogService($window, $q, $document, nodejsService) {
   }
   function saveAs(placeholder, types) {
     return $q(function (resolve, reject) {
-      var value = nodejsService.dialog.showSaveDialog({
+      var value = nodejsService.dialog("showSaveDialog", {
         title: 'Save project as...',
         defaultPath: placeholder + '.json',
         filters: [
@@ -89,7 +89,7 @@ function dialogService($window, $q, $document, nodejsService) {
   }
   function openFile(multiple, types) {
     return $q(function (resolve, reject) {
-      var value = nodejsService.dialog.showOpenDialog({
+      var value = nodejsService.dialog("showOpenDialog", {
         title: 'Open file...',
         multiSelections: multiple,
         properties: ['openFile'],
@@ -112,7 +112,7 @@ function dialogService($window, $q, $document, nodejsService) {
   }
   function openDirectory() {
     return $q(function (resolve, reject) {
-      var value = nodejsService.dialog.showOpenDialog({
+      var value = nodejsService.dialog("showOpenDialog", {
         title: 'Open directory...',
         properties: ['openDirectory']
       });
