@@ -198,11 +198,11 @@
           imgEl.x = 0;
           imgEl.y = 0;
 
-          // imgEl.alpha = bgIconAlpha;
+          imgEl.alpha = bgIconAlpha;
 
-          // imgEl.y = -height / 2; // Center height
+          imgEl.y = -height / 2; // Center height
 
-          // imgEl.x = -block._width * 0.9 / 2; // Move to the left side
+          imgEl.x = -block._width * 0.9 / 2; // Move to the left side
 
           container.addChildAt(imgEl, 0);
 
@@ -216,10 +216,9 @@
           width = imgEl.getBounds().width * scale;
 
           imgEl.x = 0;
-          imgEl.y = 0;
           imgEl.x = -width - 5; // place at the beginning of title
-          imgEl.x -= Math.min(titleText.getMeasuredWidth() * window.devicePixelRatio, 120 * window.devicePixelRatio) / 2;
-          imgEl.y = -height / 2 + titleText.getMeasuredHeight() * window.devicePixelRatio / 2;
+          imgEl.x -= Math.min(titleText.getMeasuredWidth(), 120) / 2;
+          imgEl.y = -height / 2 + titleText.getMeasuredHeight() / 2;
 
           titleTextContainer.addChildAt(imgEl, 0);
           titleTextContainer.x += width / 2;
