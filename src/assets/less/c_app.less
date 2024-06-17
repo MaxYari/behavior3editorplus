@@ -14,6 +14,72 @@ body {
   .font-base;
 }
 
+.window-controls {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1001;
+  padding: 5px 10px;
+  font-size: 1.2em;
+  font-weight: bold;
+  -webkit-app-region: no-drag;
+
+  button {
+    cursor: pointer;
+    background: transparent;
+    color: @color-dark1;
+    border: none !important;
+    outline: none !important;
+    opacity: 0.8;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    vertical-align: middle;
+
+    &:hover {
+      opacity: 1;
+      background: rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .close-btn {
+    @color: rgb(255, 35, 35);
+    background-color: fade(@color, 0%);
+
+    &:hover {
+      background-color: fade(@color, 80%);
+    }
+  }
+
+  .maximize-btn {
+    font-size: 0.8em;
+    padding-bottom: 3px;
+  }
+
+
+
+  &.light {
+    button {
+      color: @color-light1;
+    }
+  }
+}
+
+.window-header {
+  position: absolute;
+  top: 5px;
+  left: 0;
+  right: 0;
+  height: 30px;
+  z-index: 999;
+  .window-dragger
+}
+
+.window-dragger {
+  -webkit-app-region: drag;
+}
+
 .grabbing {
   cursor: url(../imgs/closedhand.cur);
   cursor: url(../imgs/closedhand.cur) 8 8, move;
@@ -50,8 +116,10 @@ a,
 .btn-default,
 .btn-warning,
 .btn-info,
-.btn-danger {
+.btn-danger,
+button {
   .no-select;
+  -webkit-app-region: no-drag;
 }
 
 .form-control[disabled],
@@ -99,11 +167,13 @@ canvas {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: @color-light3;
+  background: @color-light2;
+  width: 5px;
 }
 
 ::-webkit-scrollbar-thumb:window-inactive {
-  background: @color-light3;
+  background: @color-light2;
+  width: 5px;
 }
 
 [ng\:cloak],

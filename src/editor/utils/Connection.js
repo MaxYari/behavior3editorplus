@@ -84,8 +84,9 @@
       angle = 90;
     }
 
+    var isStealthy = false;
     if (this._inBlock && this._outBlock) {
-      var isStealthy = this._outBlock.node.isStealthy
+      isStealthy = this._outBlock.node.isStealthy;
     }
 
     graphics.clear();

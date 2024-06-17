@@ -1,3 +1,10 @@
+<div class="window-header"></div>
+<div class="window-controls" ng-if="isDesktop">
+  <button class="minimize-btn" ng-click="minimizeWindow()">-</button>
+  <button class="maximize-btn" ng-click="maximizeWindow()">🗖</button>
+  <button class="close-btn" ng-click="closeWindow()">×</button>
+</div>
+
 <div class="dash-sidebar sidebar left">
   <div class="header-button" ng-show="dash.project">
     <a ui-sref="editor">Back to Editor <i class="fas fa-angle-double-right"></i></a>

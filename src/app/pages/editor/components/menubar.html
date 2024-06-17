@@ -152,6 +152,13 @@
 
     </ul>
   </div>
+  <div class="menubar-right  window-dragger">
+    <div class="window-controls light" ng-if="isDesktop">
+      <button class="minimize-btn" ng-click="minimizeWindow()">-</button>
+      <button class="maximize-btn" ng-click="maximizeWindow()">🗖</button>
+      <button class="close-btn" ng-click="closeWindow()">×</button>
+    </div>
+  </div>
   <!-- 
   <div class="menubar-right">
     <ul>

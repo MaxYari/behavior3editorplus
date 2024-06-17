@@ -1,4 +1,5 @@
 const { app, BrowserWindow, ipcMain, dialog, crashReporter } = require('electron');
+
 const path = require('path')
 
 // Report crashes to our server.
@@ -7,6 +8,7 @@ const path = require('path')
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 var mainWindow = null;
+
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
@@ -27,16 +29,23 @@ app.on('ready', function () {
 
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 1000, height: 800, webPreferences: {
+    width: 1400, height: 900,
+    frame: false, // Disable default window frame
+    icon: __dirname + "/imgs/favicon.ico",
+    /* You can use *titleBarOverlay: true* to use the original Windows controls */
+    // titleBarOverlay: true,
+    webPreferences: {
       contextIsolation: false,
       nodeIntegration: true,
       enableRemoteModule: true
     }
   });
 
+
   // and load the index.html of the app.
   // mainWindow.loadFile('index.html');
   mainWindow.loadURL('file://' + __dirname + '/index.html');
+
 
   // Open the DevTools.
   // mainWindow.openDevTools();
@@ -52,5 +61,8 @@ app.on('ready', function () {
     // when you should delete the corresponding element.
     mainWindow = null;
   });
+
+
+
 });
 
