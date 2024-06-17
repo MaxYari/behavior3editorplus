@@ -2,7 +2,7 @@ const { app, BrowserWindow, ipcMain, dialog, crashReporter } = require('electron
 const path = require('path')
 
 // Report crashes to our server.
-crashReporter.start({ uploadToServer: false });
+// crashReporter.start({ uploadToServer: false });
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -21,9 +21,9 @@ app.on('window-all-closed', function () {
 // initialization and is ready to create browser windows.
 app.on('ready', function () {
   // Ipc event for openning a dialogue windows
-  ipcMain.handle('dialog', (event, method, params) => {
-    dialog[method](params);
-  });
+  // ipcMain.handle('dialog', (event, method, params) => {
+  //   dialog[method](params);
+  // });
 
   // Create the browser window.
   mainWindow = new BrowserWindow({
@@ -35,7 +35,8 @@ app.on('ready', function () {
   });
 
   // and load the index.html of the app.
-  mainWindow.loadFile('index.html');
+  // mainWindow.loadFile('index.html');
+  mainWindow.loadURL('file://' + __dirname + '/index.html');
 
   // Open the DevTools.
   // mainWindow.openDevTools();
