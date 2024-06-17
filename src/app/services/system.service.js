@@ -7,9 +7,9 @@ systemService.$inject = ['$window', 'nodejsService'];
 function systemService($window, nodejsService) {
   var isDesktop = !!$window.process;
   var service = {
-    isDesktop   : isDesktop,
-    getDataPath : getDataPath,
-    join        : join,
+    isDesktop: isDesktop,
+    getDataPath: getDataPath,
+    join: join,
   };
   return service;
 
@@ -40,8 +40,8 @@ function systemService($window, nodejsService) {
       return nodejsService.path.join.apply(nodejsService.path, arguments);
     } else {
       var s = arguments[0];
-      for (var i=1; i<arguments.length; i++) {
-        s += '-'+arguments[i];
+      for (var i = 1; i < arguments.length; i++) {
+        s += '-' + arguments[i];
       }
       return s;
     }

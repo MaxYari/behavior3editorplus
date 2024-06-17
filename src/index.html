@@ -10,8 +10,10 @@
   <link rel="stylesheet" href="css/preload.min.css">
 
   <script>
-
+    // Makes jquery work in electron
     delete window.module;
+
+    var JSON3 = window.JSON3;
   </script>
   <script type="text/javascript" src="js/preload.min.js"></script>
 

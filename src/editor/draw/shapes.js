@@ -263,7 +263,6 @@
     drawer.draw(-predipWidth, dipHeight);
     drawer.close();
 
-
     shape.graphics.endStroke();
     shape.graphics.endFill();
 

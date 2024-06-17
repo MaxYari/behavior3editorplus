@@ -1,8 +1,8 @@
-var app = require('app');  // Module to control application life.
-var BrowserWindow = require('browser-window');  // Module to create native browser window.
+const { app, BrowserWindow, ipcMain, dialog, crashReporter } = require('electron');
+const path = require('path')
 
 // Report crashes to our server.
-require('crash-reporter').start();
+// crashReporter.start({ uploadToServer: false });
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -20,15 +20,23 @@ app.on('window-all-closed', function () {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 app.on('ready', function () {
+  // Ipc event for openning a dialogue windows
+  // ipcMain.handle('dialog', (event, method, params) => {
+  //   dialog[method](params);
+  // });
+
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 1000, height: 800, webPreferences: {
-      nodeIntegration: false
+      contextIsolation: false,
+      nodeIntegration: true,
+      enableRemoteModule: true
     }
   });
 
   // and load the index.html of the app.
-  mainWindow.loadUrl('file://' + __dirname + '/index.html');
+  // mainWindow.loadFile('index.html');
+  mainWindow.loadURL('file://' + __dirname + '/index.html');
 
   // Open the DevTools.
   // mainWindow.openDevTools();
@@ -45,3 +53,4 @@ app.on('ready', function () {
     mainWindow = null;
   });
 });
+
