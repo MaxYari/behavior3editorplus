@@ -1,3 +1,6 @@
+// Things to add:
+// Fix undo, add parameters copy to copy-pasting, add compound selection with shift (its already there with ctrl). Make selection brighter? Can barely see it.
+
 /** @module b3e */
 (function () {
   'use strict';
@@ -19,8 +22,8 @@
     this.properties = {};
     this.isDefault = !!isDefault;
 
-    var scheme = b3e.Node.scheme
-    var updateNodeObj = b3e.Node.updateNodeObj
+    var scheme = b3e.Node.scheme;
+    var updateNodeObj = b3e.Node.updateNodeObj;
 
     /**
      * Copy this node.
@@ -35,8 +38,8 @@
     };
 
     this.update = function (data) {
-      updateNodeObj(this, data)
-    }
+      updateNodeObj(this, data);
+    };
   };
 
   b3e.Node.scheme = {
@@ -49,19 +52,19 @@
     description: null,
     properties: null,
     isDefault: null
-  }
+  };
 
   b3e.Node.updateNodeObj = function (nodeA, nodeB) {
     for (var key in b3e.Node.scheme) {
       if (b3e.Node.scheme.hasOwnProperty(key) && typeof nodeB[key] !== 'undefined') {
-        nodeA[key] = nodeB[key]
+        nodeA[key] = nodeB[key];
       }
     }
-  }
+  };
 
   b3e.Node.copyNodeObj = function (node) {
-    var obj = {}
-    b3e.Node.updateNodeObj(obj, node)
-    return obj
-  }
+    var obj = {};
+    b3e.Node.updateNodeObj(obj, node);
+    return obj;
+  };
 })();

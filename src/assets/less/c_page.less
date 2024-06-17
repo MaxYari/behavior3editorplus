@@ -1,4 +1,3 @@
-
 .page {
   color: @color-dark1;
   overflow-y: auto;
@@ -15,7 +14,11 @@
     height: @size-header;
     line-height: @size-header*1.1;
     font-size: 2.5em;
+    font-size: 1.5em;
     .font-header;
+    text-transform: uppercase;
+    letter-spacing: 8px;
+    font-weight: bold;
   }
 
   .content {
@@ -25,8 +28,13 @@
     padding: @padding-large;
     padding-left: @padding-large+@size-sidebar;
 
-    &.no-header { padding-top: @size-header; }
-    .current-project { margin-top: 10px; }
+    &.no-header {
+      padding-top: @size-header;
+    }
+
+    .current-project {
+      margin-top: 10px;
+    }
   }
 
   &-operations {
@@ -40,13 +48,17 @@
       padding-right: @padding-large;
       padding-left: @size-sidebar;
       text-align: right;
+
       ul {
         margin: 0px;
         padding: 0px;
         list-style: none;
+
         li {
           display: inline;
-          a, button {
+
+          a,
+          button {
             border: 0px;
             display: inline;
             // height: 22px;

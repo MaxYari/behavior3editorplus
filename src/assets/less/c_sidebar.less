@@ -56,6 +56,16 @@
     .font-base;
     font-weight: bold;
 
+
+
+    a {
+      display: block;
+      color: inherit;
+    }
+  }
+
+  .title,
+  .node-list-title {
     .new {
       margin-top: -1px;
       float: right;
@@ -66,11 +76,6 @@
         background-color: @color-green;
       }
     }
-
-    a {
-      display: block;
-      color: inherit;
-    }
   }
 
   .header-button {
@@ -79,7 +84,7 @@
     height: @size-header;
     line-height: @size-header*1.1;
     font-size: 1.5em;
-    background-color: @color-dark2;
+    background-color: transparent;
     border-bottom: 1px solid @color-dark4;
     text-transform: none;
     .font-header;

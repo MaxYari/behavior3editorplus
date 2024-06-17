@@ -177,9 +177,9 @@
     var fieldValueFontSize = '12px'; // Font size for the field-value pairs
     var color = settings.get('block_symbol_color');
     var bgIconAlpha = 0.2;
-    if (block.node.category == b3e.INTERRUPT) {
+    if (block.node.isStealthy) {
       color = settings.get('interrupt_symbol_color');
-      bgIconAlpha = 0.1;
+      bgIconAlpha = 0.15;
     }
 
 

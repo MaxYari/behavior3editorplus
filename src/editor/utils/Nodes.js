@@ -56,7 +56,8 @@ b3e.StateInterrupt = {
   title: "Interrupt",
   icon: { className: "fas fa-fast-forward" },
   description: "This node should be used as a child of a composite node (Sequence/Selector e.t.c). This node will not be started directly by the composite, instead it will be continuously evaluating 'condition' in the background.<br>When 'condition' becomes true - this node stops (interrupts) a currently running branch of its composite parent and starts its own child instead.<br>It will not attempt to interrupt any of its own children.",
-  properties: { condition: "" }
+  properties: { condition: "" },
+  isStealthy: true
 };
 
 b3e.ContinuousStateCondition = {
@@ -82,8 +83,8 @@ b3e.Cooldown = {
   category: "decorator",
   title: "Cooldown",
   icon: { className: "fas fa-hourglass-half" },
-  description: "This node will start its child only if the amount of time passed from the last start is bigger than the specified amount of time ('duration' property, in seconds). Otherwise it will fail.<br>In other words: it needs to cool-down for the specified amount of time, before it can be used again.",
-  properties: { duration: 0 }
+  description: "This node will start its child only if the amount of time passed from the last start is bigger than the specified amount of time ('duration' property, in seconds). Otherwise it will fail.<br>In other words: it needs to cool-down for the specified amount of time, before it can be used again. If 'hotWhileRunning' property is 'true' - the cooldown countdown will start only after its children are done running.",
+  properties: { duration: 0, hotWhileRunning: false }
 };
 
 b3e.RandomSuccess = {

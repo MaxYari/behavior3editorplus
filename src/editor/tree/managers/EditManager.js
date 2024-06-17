@@ -77,6 +77,7 @@ b3e.tree.EditManager = function (editor, project, tree) {
     for (var key in project._clipboard.blocks) {
       var spec = project._clipboard.blocks[key];
       var block = new b3e.Block(spec.node);
+      block.properties = spec.properties;
 
       spec.x += 50;
       spec.y += 50;

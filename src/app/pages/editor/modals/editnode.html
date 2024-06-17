@@ -34,6 +34,11 @@
                 <option value="interrupt">Interrupt</option>
                 <option value="action">Action</option>
               </select>
+              <label ng-if="editnode.node.category === 'interrupt'"
+                tooltip="Stealthy interrupts are never directly executed by their parent nodes, they are skipped over and ignored. Only way for a stealthy interrupt to start - is to trigger an interrupt.">
+                <input type="checkbox" ng-model="editnode.node.isStealthy">
+                Stealthy
+              </label>
             </div>
           </div>
 

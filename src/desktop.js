@@ -32,6 +32,10 @@ app.on('ready', function () {
 
   // Open the DevTools.
   // mainWindow.openDevTools();
+  mainWindow.webContents.on('new-window', function (e, url) {
+    e.preventDefault();
+    require('electron').shell.openExternal(url);
+  });
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {

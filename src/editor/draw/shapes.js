@@ -219,15 +219,19 @@
     } else {
       y = h / 2 + anchorOffsetX;
     }
+
+    var color = settings.get('decorator_color');
+    if (block.node.isStealthy) color = settings.get('interrupt_color');
+
     makeAnchor(shape, x, y,
       settings.get('anchor_radius'),
-      settings.get('interrupt_color'),
+      color,
       settings.get('anchor_border_width'),
       settings.get('block_border_color')
     );
     makeAnchor(shape, -x, -y,
       settings.get('anchor_radius'),
-      settings.get('interrupt_color'),
+      color,
       settings.get('anchor_border_width'),
       settings.get('block_border_color')
     );
@@ -237,10 +241,10 @@
     var centralWidth = w - 2 * fixedSideWidth; // width of the central part of the hexagon
     var halfHeight = h / 2; // half of the height of the hexagon
     var dipHeight = halfHeight / 2;
-    var predipWidth = fixedSideWidth * 0.25;
+    var predipWidth = fixedSideWidth * 0.33;
     var postdipWidth = fixedSideWidth - predipWidth;
 
-    shape.graphics.beginFill(settings.get('interrupt_color'));
+    shape.graphics.beginFill(color);
     shape.graphics.setStrokeStyle(settings.get('block_border_width'), 'round');
     shape.graphics.beginStroke(settings.get('block_border_color'));
 
@@ -248,16 +252,16 @@
 
     // Drawing the hexagon with fixed sides
 
-    drawer.draw(postdipWidth, dipHeight)
-    drawer.draw(predipWidth, dipHeight)
-    drawer.draw(centralWidth, 0)
-    drawer.draw(predipWidth, -dipHeight)
-    drawer.draw(postdipWidth, -dipHeight)
-    drawer.draw(-postdipWidth, -dipHeight)
-    drawer.draw(-predipWidth, -dipHeight)
-    drawer.draw(-centralWidth, 0)
-    drawer.draw(-predipWidth, dipHeight)
-    drawer.close()
+    drawer.draw(postdipWidth, dipHeight);
+    drawer.draw(predipWidth, dipHeight);
+    drawer.draw(centralWidth, 0);
+    drawer.draw(predipWidth, -dipHeight);
+    drawer.draw(postdipWidth, -dipHeight);
+    drawer.draw(-postdipWidth, -dipHeight);
+    drawer.draw(-predipWidth, -dipHeight);
+    drawer.draw(-centralWidth, 0);
+    drawer.draw(-predipWidth, dipHeight);
+    drawer.close();
 
 
     shape.graphics.endStroke();

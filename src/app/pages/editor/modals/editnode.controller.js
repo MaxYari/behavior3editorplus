@@ -43,7 +43,10 @@
         vm.node.category = b3e.ACTION;
       }
 
+      if ($stateParams.category) {
 
+        vm.node.category = $stateParams.category;
+      }
 
       var blacklist = [];
       p.nodes.each(function (node) {
