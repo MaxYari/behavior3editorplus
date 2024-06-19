@@ -148,7 +148,7 @@
 
 
   b3e.draw.decoratorShape = function (block, settings) {
-    var bounds = block._displaySymbol.getBounds();
+    var bounds = block._displaySymbol.getBounds() || { width: 0, height: 0 };
 
     var w = Math.max(bounds.width + 80, block._width); // Keeping the original width calculation
     var h = Math.max(bounds.height + 25, block._height);
@@ -203,7 +203,7 @@
 
 
   b3e.draw.interruptShape = function (block, settings) {
-    var bounds = block._displaySymbol.getBounds();
+    var bounds = block._displaySymbol.getBounds() || { width: 0, height: 0 };
 
     var w = Math.max(bounds.width + 80, block._width); // Keeping the original width calculation
     var h = Math.max(bounds.height + 25, block._height);
@@ -272,7 +272,7 @@
 
   b3e.draw.actionShape = function (block, settings) {
 
-    var bounds = block._displaySymbol.getBounds();
+    var bounds = block._displaySymbol.getBounds() || { width: 0, height: 0 };
     var w = Math.max(bounds.width + 60, block._width);
     var h = Math.max(bounds.height + 15, block._height);
     var anchorOffsetX = settings.get('anchor_offset_x');
@@ -302,7 +302,7 @@
   };
 
   b3e.draw.conditionShape = function (block, settings) {
-    var bounds = block._displaySymbol.getBounds();
+    var bounds = block._displaySymbol.getBounds() || { width: 0, height: 0 };
 
     var w = Math.max(bounds.width + 15, block._width);
     var h = Math.max(bounds.height + 15, block._height);
@@ -326,7 +326,7 @@
   };
 
   b3e.draw.treeShape = function (block, settings) {
-    var bounds = block._displaySymbol.getBounds();
+    var bounds = block._displaySymbol.getBounds() || { width: 0, height: 0 };
     var w = Math.max(bounds.width + 15, block._width);
     var h = Math.max(bounds.height + 15, block._height);
     var anchorOffsetX = settings.get('anchor_offset_x');

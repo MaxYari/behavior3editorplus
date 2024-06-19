@@ -130,6 +130,7 @@
       return $q(function (resolve, reject) {
         try {
           var project = storageService.load(path);
+          project.path = path;
           editorService.openProject(project.data);
           _setProject(project);
           resolve();

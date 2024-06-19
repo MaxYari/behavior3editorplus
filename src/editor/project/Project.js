@@ -27,8 +27,9 @@
 
     this.nodes.add(b3e.Root, true);
     this.nodes.add(b3e.Sequence, true);
-    this.nodes.add(b3e.Priority, true);
-    this.nodes.add(b3e.Random, true);
+    this.nodes.add(b3e.SequenceUntilFailure, true);
+    this.nodes.add(b3e.SequenceUntilSuccess, true);
+    this.nodes.add(b3e.RunRandom, true);
     //this.nodes.add(b3e.MemSequence, true);
     //this.nodes.add(b3e.MemPriority, true);
     this.nodes.add(b3e.Repeater, true);
@@ -37,6 +38,7 @@
     this.nodes.add(b3e.StateCondition, true);
     this.nodes.add(b3e.StateInterrupt, true);
     this.nodes.add(b3e.ContinuousStateCondition, true);
+    this.nodes.add(b3e.RandomThrough, true);
     this.nodes.add(b3e.LimitRunTime, true);
     //this.nodes.add(b3e.MaxTime, true);
     this.nodes.add(b3e.RunTimeOutcome, true);

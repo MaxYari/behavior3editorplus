@@ -5,7 +5,7 @@
     <div class="page-operations-content">
       <ul>
         <li ng-show="projects.isDesktop"><button class="btn-default" ng-click="projects.openProject()"><i
-              class="fa fa-folder-open-o"></i> Open Project</button></li>
+              class="far fa-folder-open"></i> Open Project</button></li>
         <li><button class="btn-success" ng-click="projects.newProject()"><i class="fa fa-plus"></i> New Project</button>
         </li>
       </ul>
@@ -36,6 +36,7 @@
 
           <small><em>Current project</em></small>
           <h3 class="current-project">{{item.name}}</h3>
+          <small class="dim-text">{{item.path}}</small>
         </td>
         <td ng-hide="item.isOpen">
           <div class="btn-group pull-right" role="group" aria-label="...">
@@ -46,6 +47,7 @@
           </div>
           <p>{{item.name}}</p>
         </td>
+
       </tr>
     </table>
 

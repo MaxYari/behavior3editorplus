@@ -8,18 +8,28 @@ b3e.Root = {
   description: "Every tree should start with this node. Change this node's title to rename the tree."
 };
 
-b3e.Random = {
-  name: "Random",
+b3e.RunRandom = {
+  name: "RunRandom",
   category: "composite",
-  title: "Run Random",
+  title: "[Run Random]",
   icon: { className: "fas fa-dice" },
-  description: "Randomly picks a single child task and executes it."
+  description: "Randomly picks a single child task and executes it. If 'avoidRepeats' is 'true' - will remember last selected child task and will avoid it next time.",
+  properties: { avoidRepeats: "false" }
+};
+
+b3e.Sequence = {
+  name: "Sequence",
+  category: "composite",
+  title: "...[Agnostic Sequence]",
+  icon: { className: "fas fa-arrow-right" },
+  description: "Executes child tasks one after another until all them were executed. Child outcomes don't matter, always returns success.<br>Starts from the left-most child and moves from left to right (in vertical layout) unless 'RandomStart' parameter is 'true' - then starts from a random child, moves left to right and if necessary - loops back to the first child after the last one.",
+  properties: { randomStart: "false", shuffle: "false" }
 };
 
 b3e.AlwaysSucceed = {
   name: "AlwaysSucceed",
   category: "decorator",
-  title: "Always Succeed",
+  title: "Always [Succeed]",
   icon: { className: "fas fa-check" },
   description: "Returns success as soon as child task finishes."
 };
@@ -27,9 +37,18 @@ b3e.AlwaysSucceed = {
 b3e.AlwaysFail = {
   name: "AlwaysFail",
   category: "decorator",
-  title: "Always Fail",
+  title: "Always [Fail]",
   icon: { className: "fas fa-times" },
   description: "Returns failure as soon as child task finishes."
+};
+
+b3e.RandomThrough = {
+  name: "RandomThrough",
+  category: "decorator",
+  title: "[Random] Through",
+  icon: { className: "fas fa-dice" },
+  description: "Randomly lets the execution flow through, based on the 'probability' parameter (in 1-100 range). Otherwise fails.",
+  properties: { probability: 50 }
 };
 
 b3e.StateCondition = {
@@ -55,7 +74,7 @@ b3e.StateInterrupt = {
   category: "interrupt",
   title: "Interrupt",
   icon: { className: "fas fa-fast-forward" },
-  description: "This node should be used as a child of a composite node (Sequence/Selector e.t.c). This node will not be started directly by the composite, instead it will be continuously evaluating 'condition' in the background.<br>When 'condition' becomes true - this node stops (interrupts) a currently running branch of its composite parent and starts its own child instead.<br>It will not attempt to interrupt any of its own children.",
+  description: "This node should be used as a child of a composite node (Sequence/Selector e.t.c). This node will not be started directly by the composite, instead it will be continuously evaluating 'condition' in the background.<br>When 'condition' becomes true - this node stops (interrupts) a currently running branch of its composite parent and starts its own child instead.<br>It will not attempt to interrupt any of its own children. When done - the execution flow will continue back to its parent.",
   properties: { condition: "" },
   isStealthy: true
 };
@@ -84,7 +103,7 @@ b3e.Cooldown = {
   title: "Cooldown",
   icon: { className: "fas fa-hourglass-half" },
   description: "This node will start its child only if the amount of time passed from the last start is bigger than the specified amount of time ('duration' property, in seconds). Otherwise it will fail.<br>In other words: it needs to cool-down for the specified amount of time, before it can be used again. If 'hotWhileRunning' property is 'true' - the cooldown countdown will start only after its children are done running.",
-  properties: { duration: 0, hotWhileRunning: false }
+  properties: { duration: 0, hotWhileRunning: "false" }
 };
 
 b3e.RandomSuccess = {
@@ -100,14 +119,19 @@ b3e.RandomSuccess = {
 
 
 // Create extensions for each b3.something
-b3e.Sequence = $.extend(b3.Sequence.prototype, {
+b3e.SequenceUntilFailure = $.extend(b3.Sequence.prototype, {
+  name: "SequenceUntilFailure",
+  title: "X [Sequence Until Failure]",
   icon: { className: "fas fa-arrow-right" },
-  description: "Executes child tasks one after another, until one fails or all of them succeed."
+  description: "Executes child tasks one after another, until one fails or all of them succeed. If a child fails - reports failure, if all succeed - reports success.<br>Starts from the left-most child and moves from left to right (in vertical layout) unless 'RandomStart' parameter is 'true' - then starts from a random child, moves left to right and if necessary - loops back to the first child after the last one.",
+  properties: { randomStart: "false", shuffle: "false" }
 });
-b3e.Priority = $.extend(b3.Priority.prototype, {
-  title: "Selector",
-  icon: { className: "fas fa-question" },
-  description: "Executes child tasks one after another, until one succeeds or all of them fail."
+b3e.SequenceUntilSuccess = $.extend(b3.Priority.prototype, {
+  name: "SequenceUntilSuccess",
+  title: "✔ [Sequence Until Success]",
+  icon: { className: "fas fa-arrow-right" },
+  description: "Executes child tasks one after another, until one succeeds or all of them fail. If a child succeeds - reports success, if all fail - reports failure.<br>Starts from the left-most child and moves from left to right (in vertical layout) unless 'RandomStart' parameter is 'true' - then starts from a random child, moves left to right and if necessary - loops back to the first child after the last one.",
+  properties: { randomStart: "false", shuffle: "false" }
 });
 b3e.MemSequence = $.extend(b3.MemSequence.prototype, {
   icon: { className: "fas fa-arrow-right" }
@@ -122,11 +146,13 @@ b3e.Repeater = $.extend(b3.Repeater.prototype, {
   properties: { "maxLoop": -1 }
 });
 b3e.RepeatUntilFailure = $.extend(b3.RepeatUntilFailure.prototype, {
+  title: "[Repeat] Until Failure",
   icon: { className: "fas fa-redo" },
-  description: "Repeats a child task specified amount of times ('maxLoop' parameter, -1 = no limit).<br>Stops and reports success after a first child task failure.<br>Will report failure if all repetitions were done without a single child failure.",
+  description: "Repeats a child task specified amount of times ('maxLoop' parameter, -1 = no limit).<br>Stops and reports failure at a first child task failure.<br>Will report success if all repetitions were done without a single child failure.",
   properties: { "maxLoop": -1 }
 });
 b3e.RepeatUntilSuccess = $.extend(b3.RepeatUntilSuccess.prototype, {
+  title: "[Repeat] Until Success",
   icon: { className: "fas fa-redo" },
   description: "Repeats a child task specified amount of times ('maxLoop' parameter, -1 = no limit).<br>Stops and reports success after a first child task success.<br>Will report failure if all repetitions were done without a single child success.",
   properties: { "maxLoop": -1 }

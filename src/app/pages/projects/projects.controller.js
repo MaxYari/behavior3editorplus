@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -9,17 +9,17 @@
     '$state',
     '$window',
     'dialogService',
-    'systemService', 
+    'systemService',
     'notificationService',
     'projectModel'
   ];
 
   function ProjectsController($state,
-                              $window,
-                              dialogService, 
-                              systemService,
-                              notificationService,
-                              projectModel) {
+    $window,
+    dialogService,
+    systemService,
+    notificationService,
+    projectModel) {
 
     // HEAD //
     var vm = this;
@@ -40,7 +40,7 @@
       vm.isDesktop = systemService.isDesktop;
       projectModel
         .getRecentProjects()
-        .then(function(recents) {
+        .then(function (recents) {
           vm.recentProjects = recents;
         });
     }
@@ -48,7 +48,7 @@
     function _newProject(path, name) {
       projectModel
         .newProject(path, name)
-        .then(function() {
+        .then(function () {
           $state.go('editor');
         });
     }
@@ -58,7 +58,7 @@
         // Get project name
         dialogService
           .prompt('New project', null, 'input', 'Project name')
-          .then(function(name) {
+          .then(function (name) {
             // If no name provided, abort
             if (!name) {
               notificationService.error(
@@ -74,11 +74,11 @@
 
               dialogService
                 .saveAs(placeholder, ['.b3', '.json'])
-                .then(function(path) {
+                .then(function (path) {
                   _newProject(path, name);
                 });
             } else {
-              var path = 'b3projects-'+b3.createUUID();  
+              var path = 'b3projects-' + b3.createUUID();
               _newProject(path, name);
             }
           });
@@ -87,9 +87,9 @@
       if ($window.editor.isDirty()) {
         dialogService
           .confirm(
-            'Leave without saving?', 
-            'If you proceed you will lose all unsaved modifications.', 
-            null, {closeOnConfirm: false})
+            'Leave without saving?',
+            'If you proceed you will lose all unsaved modifications.',
+            null, { closeOnConfirm: false })
           .then(doNew);
       } else {
         doNew();
@@ -99,9 +99,9 @@
     function _openProject(path) {
       projectModel
         .openProject(path)
-        .then(function() {
+        .then(function () {
           $state.go('editor');
-        }, function() {
+        }, function () {
           notificationService.error(
             'Invalid file',
             'Couldn\'t open the project file.'
@@ -115,7 +115,7 @@
         } else {
           dialogService
             .openFile(false, ['.b3', '.json'])
-            .then(function(path) {
+            .then(function (path) {
               _openProject(path);
             });
         }
@@ -124,7 +124,7 @@
       if ($window.editor.isDirty()) {
         dialogService
           .confirm(
-            'Leave without saving?', 
+            'Leave without saving?',
             'If you proceed you will lose all unsaved modifications.')
           .then(doOpen);
       } else {
@@ -137,7 +137,7 @@
 
       dialogService
         .prompt('Rename project', null, 'input', project.name)
-        .then(function(name) {
+        .then(function (name) {
           // If no name provided, abort
           if (!name) {
             notificationService.error(
@@ -150,7 +150,7 @@
           project.name = name;
           projectModel
             .saveProject(project)
-            .then(function() {
+            .then(function () {
               _activate();
               notificationService.success(
                 'Project renamed',
@@ -163,12 +163,12 @@
     function saveProject() {
       projectModel
         .saveProject()
-        .then(function() {
+        .then(function () {
           notificationService.success(
             'Project saved',
             'The project has been saved'
           );
-        }, function() {
+        }, function () {
           notificationService.error(
             'Error',
             'Project couldn\'t be saved'
@@ -184,8 +184,8 @@
       if ($window.editor.isDirty()) {
         dialogService
           .confirm(
-            'Leave without saving?', 
-            'If you proceed you will lose all unsaved modifications.', 
+            'Leave without saving?',
+            'If you proceed you will lose all unsaved modifications.',
             null)
           .then(doClose);
       } else {
@@ -196,12 +196,12 @@
     function removeProject(path) {
       dialogService.
         confirm(
-          'Remove project?', 
-          'Are you sure you want to remove this project?'
-        ).then(function() {
+          'Remove project?',
+          'Are you sure you want to remove this project? The project will only be removed from the list, not from the file system.'
+        ).then(function () {
           projectModel
             .removeProject(path)
-            .then(function() {
+            .then(function () {
               _activate();
               notificationService.success(
                 'Project removed',
