@@ -53,6 +53,7 @@
     this.nodes.add(b3e.RandomSuccess, true);
     this.nodes.add(b3e.Runner, true);
     this.nodes.add(b3e.Wait, true);
+    this.nodes.add(b3e.SetState, true);
     //this.nodes.add(b3e.Error, true);
 
 

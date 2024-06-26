@@ -115,6 +115,14 @@ b3e.RandomSuccess = {
   properties: { probability: 50 }
 };
 
+b3e.SetState = {
+  name: "SetState",
+  category: "action",
+  title: "Set State",
+  icon: { className: "fas fa-list-ul" },
+  description: "Writes field: value pairs provided in this node properties into the state object."
+};
+
 
 
 
