@@ -12,7 +12,7 @@
   "bugs": "https://github.com/behavior3/behavior3editor/issues",
   "main": "build/desktop.js",
   "devDependencies": {
-    "electron-builder": "^23.0.0",
+    "electron-builder": "^24.13.3",
     "electron-prebuilt": "1.1.2",
     "gulp": "~3.9.0",
     "gulp-angular-templatecache": "~1.7.0",
