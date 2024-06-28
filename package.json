@@ -8,6 +8,7 @@
   "bugs": "https://github.com/behavior3/behavior3editor/issues",
   "repository": "github:behavior3/behavior3editor",
   "main": "build/desktop.js",
+  "email": "dontwanttoprovidemyprivateemailsorry@gmail.com",
   "devDependencies": {
     "electron-builder": "^24.13.3",
     "electron-prebuilt": "1.1.2",
