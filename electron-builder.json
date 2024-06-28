@@ -1,0 +1,9 @@
+{
+    "appId": "Behaviour3+ Editor",
+    "icon": "build/imgs/icon_big.png",
+    "files": [
+        "build/**/*",
+        "node_modules/**/*",
+        "package.json"
+    ]
+}
