@@ -5,6 +5,11 @@ on: push
 jobs:
   release:
     runs-on: ${{ matrix.os }}
+    permissions:
+      contents: write
+      pull-requests: write
+      repository-projects: write
+      actions: write
 
     strategy:
       matrix:
@@ -24,7 +29,7 @@ jobs:
         with:
           # GitHub token, automatically provided to the action
           # (No need to define this secret in the repo settings)
-          github_token: ${{ secrets.ACTIONS_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
           # If the commit is tagged with a version (e.g. "v1.0.0"),
           # release the app after building
