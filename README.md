@@ -1,4 +1,4 @@
-# BEHAVIOR3EDITOR
+# Behavior3+ Editor
 
 ![interface preview](preview.png)
 
@@ -14,14 +14,15 @@ New features include:
 
 Behaviour3+ Editor and _luabehaviourtree 2e_ were actively used in the development of _Combat AI Behavior Overhaul_ for [OpenMW](https://openmw.org/)
 
-## Why Behavior3 Editor?
-
-Why should you use b3editor? What is different from other editors? Can it compete against commercial alternatives? - Well, check it out some characteristics of Behavior3 Editor:
-
 ## Requirements
 
 Gulp pipeline has incompatibilities with some of the newer Node.js versions. 
 Been tested to work fine on Node.js 20.11.0.
+
+## Why Behavior3 Editor?
+
+Why should you use b3editor? What is different from other editors? Can it compete against commercial alternatives? - Well, check it out some characteristics of Behavior3 Editor:
+
 
 - **Open Source Software**: under MIT license, you can use this software freely, adapt it to your need and even use a specialized internal version in your company. You can also contribute with bug fixes, suggestions and patches to make it better.
 
