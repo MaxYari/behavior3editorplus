@@ -2,6 +2,7 @@
   "name": "behavior3editor",
   "version": "[BUILD_VERSION]",
   "main": "desktop.js",
+  "email": "dontwanttoprovidemyprivateemailsorry@gmail.com",
   "window": {
     "title": "Behavior3 Editor (v[BUILD_VERSION]) https://github.com/behavior3",
     "position": "center",
