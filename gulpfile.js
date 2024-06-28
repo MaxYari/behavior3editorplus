@@ -9,7 +9,6 @@ var less = require('gulp-less');
 var jshint = require('gulp-jshint');
 var foreach = require("gulp-foreach");
 var zip = require("gulp-zip");
-var packager = require('@electron/packager');
 var templateCache = require('gulp-angular-templatecache');
 var replace = require('gulp-replace');
 var stylish = require('jshint-stylish');
@@ -228,35 +227,8 @@ gulp.task('_watch', ['_livereload'], function () {
 });
 
 
-// TASKS (NODE WEBKIT) ========================================================
-gulp.task('_electron', ['build'], function (cb) {
-  packager({
-    dir: 'build',
-    out: '.temp-dist',
-    name: project.name,
-    platform: 'linux,win32',
-    arch: 'all',
-    version: '0.34.2',
-    overwrite: true,
-    asar: true
-  }, function done(err, appPath) {
-    cb(err);
-  })
-});
-
-gulp.task('_electron_zip', ['_electron'], function () {
-  return gulp.src('.temp-dist/*')
-    .pipe(foreach(function (stream, file) {
-      var fileName = file.path.substr(file.path.lastIndexOf("/") + 1);
-      gulp.src('.temp-dist/' + fileName + '/**/*')
-        .pipe(zip(fileName + '.zip'))
-        .pipe(gulp.dest('./dist'));
-      return stream;
-    }));
-});
-
 // COMMANDS ===================================================================
 gulp.task('build', ['_vendor', '_preload', '_app_build']);
 gulp.task('dev', ['_vendor', '_preload', '_app_dev']);
 gulp.task('serve', ['_vendor', '_preload', '_app_dev', '_watch']);
-gulp.task('dist', ['_electron_zip']);
+
