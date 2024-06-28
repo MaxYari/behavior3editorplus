@@ -19,8 +19,21 @@ jobs:
         with:
           node-version: 20.11.0
 
-      - name: Build/release Electron app
+      - name: Build/release Electron app non Linux
         uses: samuelmeuli/action-electron-builder@v1
+        if: runner.os != 'Linux'
+        with:
+          # GitHub token, automatically provided to the action
+          # (No need to define this secret in the repo settings)
+          github_token: ${{ secrets.github_token }}
+
+          # If the commit is tagged with a version (e.g. "v1.0.0"),
+          # release the app after building
+          release: ${{ startsWith(github.ref, 'refs/tags/v') }}
+          icon: build/imgs/icon_big.png
+      - name: Build/release Electron app Linux
+        uses: samuelmeuli/action-electron-builder@v1
+        if: runner.os == 'Linux'
         with:
           # GitHub token, automatically provided to the action
           # (No need to define this secret in the repo settings)
@@ -31,6 +44,5 @@ jobs:
           release: ${{ startsWith(github.ref, 'refs/tags/v') }}
           icon: build/imgs/icon_big.png
           args: >
-            --win
             --linux appimage
             --linux rpm
