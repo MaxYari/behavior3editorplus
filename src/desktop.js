@@ -48,7 +48,7 @@ app.on('ready', function () {
 
 
   // Open the DevTools.
-  // mainWindow.openDevTools();
+  mainWindow.openDevTools();
   mainWindow.webContents.on('new-window', function (e, url) {
     e.preventDefault();
     require('electron').shell.openExternal(url);

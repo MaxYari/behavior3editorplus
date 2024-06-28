@@ -1,7 +1,7 @@
 // Synchroniously fetch fontawesome icons metadata, includes raw svgs as strings
 $.ajaxSetup({ async: false });
 if (!window.faIconsMeta) {
-  $.getJSON("json/icons.json", function (d) { window.faIconsMeta = d; });
+  $.getJSON("./json/icons.json", function (d) { window.faIconsMeta = d; });
 }
 $.ajaxSetup({ async: true });
 

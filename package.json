@@ -42,6 +42,7 @@
   },
   "scripts": {
     "electron-build": "electron-builder",
-    "build": "gulp build"
+    "build": "gulp build",
+    "builddev": "gulp dev"
   }
 }

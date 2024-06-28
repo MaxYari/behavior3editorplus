@@ -23,16 +23,22 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 20.11.0
+
       - run: npm install
+      - run: npm run builddev
 
       - name: Build/release Electron app on Linux
         if: runner.os == 'Linux'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           npx electron-builder --linux appimage tar.gz  # Specify Linux targets to avoid .deb
         continue-on-error: true
 
       - name: Build/release Electron app on Windows
         if: runner.os == 'Windows'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           npx electron-builder --win nsis zip  # Specify Windows targets
         continue-on-error: true
@@ -41,4 +47,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: electron-builds-${{ runner.os }}
-          path: dist/**/* # Upload all files from the dist directory
+          path: |
+            dist/**/*
+            !dist/*unpacked
+            !dist/*.blockmap
