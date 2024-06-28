@@ -116,9 +116,9 @@ preloadedImages = {};
   };
 
   var propToShort = {
-    randomStart: "..⮣..",
-    shuffle: "🔀",
-    avoidRepeats: "↻X"
+    randomStart: { replacement: "..⮣..", defaultVal: false },
+    shuffle: { replacement: "🔀", defaultVal: false },
+    maxSameRuns: { replacement: "↻X>%s", defaultVal: -1 }
   };
 
   function isShortableProp(prop) {
@@ -134,12 +134,14 @@ preloadedImages = {};
     // Append field-value pairs from block.properties
     for (var prop in block.properties) {
       if (block.properties.hasOwnProperty(prop)) {
+        var val = block.properties[prop];
         if (block.node.category == b3e.COMPOSITE && isShortableProp(prop)) {
-          if (block.properties[prop] == true || block.properties[prop] == 'true') {
-            propertiesContent += propToShort[prop] + '\n';
+          var shortObj = propToShort[prop];
+          if (val && val.toString() != shortObj.defaultVal.toString()) {
+            propertiesContent += shortObj.replacement.replace("%s", val) + '\n';
           }
         } else {
-          propertiesContent += prop + ': ' + block.properties[prop] + '\n';
+          propertiesContent += prop + ': ' + val + '\n';
         }
       }
     }

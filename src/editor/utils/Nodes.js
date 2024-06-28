@@ -13,8 +13,17 @@ b3e.RunRandom = {
   category: "composite",
   title: "[Run Random]",
   icon: { className: "fas fa-dice" },
-  description: "Randomly picks a single child task and executes it. If 'avoidRepeats' is 'true' - will remember last selected child task and will avoid it next time.",
-  properties: { avoidRepeats: "false" }
+  description: "Randomly picks a single child task and executes it. If 'maxSameRuns' is more than 0 - will remember last selected child task and will avoid running it next time if it was already run for 'maxSameRuns' amount of times consecutively.",
+  properties: { maxSameRuns: -1 }
+};
+
+b3e.RunRandomWeight = {
+  name: "RunRandomWeight",
+  category: "decorator",
+  title: "[Run Random] Weight",
+  icon: { className: "fas fa-dice" },
+  description: "To be used with 'Run Random' composite node. Determines the probability weight of this branch being picked. Doesnt modify its child's behaviour in any way.",
+  properties: { weight: 1 }
 };
 
 b3e.Sequence = {
@@ -74,7 +83,7 @@ b3e.StateInterrupt = {
   category: "interrupt",
   title: "Interrupt",
   icon: { className: "fas fa-fast-forward" },
-  description: "This node should be used as a child of a composite node (Sequence/Selector e.t.c). This node will not be started directly by the composite, instead it will be continuously evaluating 'condition' in the background.<br>When 'condition' becomes true - this node stops (interrupts) a currently running branch of its composite parent and starts its own child instead.<br>It will not attempt to interrupt any of its own children. When done - the execution flow will continue back to its parent.",
+  description: "This node should be used as a child of a composite node (Sequence/Selector e.t.c). This node will not be started directly by the composite, instead it will be continuously evaluating 'condition' in the background.<br>When 'condition' becomes true - this node stops (interrupts) a currently running branch of its composite parent and starts its own child instead.<br>It will stop its children when condition becomes false again. When done - the execution flow will continue back to its parent.",
   properties: { condition: "" },
   isStealthy: true
 };

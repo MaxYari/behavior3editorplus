@@ -1,13 +1,16 @@
 {
   "author": "Renato de Pontes Pereira, Max Yari",
-  "name": "behavior3editor",
+  "name": "behavior3peditor",
+  "description": "Behavior3+ Editor is an open source visual tool to create and design Behavior Trees. It provides a general solution to model agents for games and other applications, such as simulations and robotics. Behavior3 Editor uses an open - and simple - format to describe the behavior trees, thus you can adapt easily to your own library, tool or framework. This is a special version of the editor adjusted to support all of the Luabehaviourtrees 2e nodes.",
   "version": "0.5.0",
   "homepage": "https://github.com/behavior3",
   "license": "MIT",
   "bugs": "https://github.com/behavior3/behavior3editor/issues",
   "repository": "github:behavior3/behavior3editor",
+  "main": "build/desktop.js",
   "devDependencies": {
     "@electron/packager": "^18.0.0",
+    "electron-builder": "^24.13.3",
     "electron-prebuilt": "1.1.2",
     "gulp": "~3.9.0",
     "gulp-angular-templatecache": "~1.7.0",
@@ -31,5 +34,31 @@
   "dependencies": {
     "fontawesome-iconpicker": "^3.2.0",
     "jquery": "^3.7.1"
+  },
+  "build": {
+    "appId": "Behaviour3+ Editor",
+    "icon": "build/imgs/icon_big.png",
+    "files": [
+      "build/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb",
+        "rpm"
+      ]
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    }
+  },
+  "scripts": {
+    "app:dir": "electron-builder --dir",
+    "app:dist": "electron-builder",
+    "build": "gulp build"
   }
 }

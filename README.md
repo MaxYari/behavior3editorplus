@@ -2,7 +2,17 @@
 
 ![interface preview](preview.png)
 
-**Behavior3 Editor** is the official visual editor for the **Behavior3** libraries. It can be accessed online or you can download it to have handle local projects.
+**Behavior3+ Editor** is primarily a standalone behavior tree editor (but probably can still be hosted online) based on [Behaviour3 Editor](https://github.com/behavior3/behavior3editor). This version of the editor supports all of the _luabehaviourtree 2e_ (link is coming, it's also a fork I'm working on, not published yet) nodes out of the box and provides a visual and quality-of-life improvement over the original _Behaviour3 Editor_.
+
+New features include:
+- Cleaner overall visuals
+- Node icons
+- Property values displayed on the nodes in the tree
+- New node type - Interrupts
+- Automatic release builds (WIP)
+- Few other minor changes and bug fixes
+
+Behaviour3+ Editor and _luabehaviourtree 2e_ were actively used in the development of _Combat AI Behavior Overhaul_ for [OpenMW](https://openmw.org/)
 
 ## Why Behavior3 Editor?
 

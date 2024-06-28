@@ -126,6 +126,19 @@
         resolve();
       });
     }
+    function backupProject(project) {
+      // At the project load can find the oldest temp file matching the project and save it as a field to the project object
+      // Should keep up to 3 temp files
+      // Then here i can write to that temp file
+      // Backup should be run in the background every minute
+      project = project || currentProject;
+      project.data = editorService.exportProject();
+
+      return $q(function (resolve, reject) {
+        storageService.save(project.path.replace(".b3", ".temp.b3"), project);
+        resolve();
+      });
+    }
     function openProject(path) {
       return $q(function (resolve, reject) {
         try {
