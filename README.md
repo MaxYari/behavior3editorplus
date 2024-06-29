@@ -1,12 +1,12 @@
 # Behavior3+ Editor
 
-## THIS FORK MIGRATED TO ANOTHER REPOSITORY
-
-This fork was moved to a separate repository of its own: [behavior3editorplus](https://github.com/MaxYari/behavior3editorplus) for better visibility online. All further work will be done there.
-
 ![interface preview](preview.png)
 
-**Behavior3+ Editor** is primarily a standalone behavior tree editor (but probably can still be hosted online) based on [Behaviour3 Editor](https://github.com/behavior3/behavior3editor). This version of the editor supports all of the _luabehaviourtree 2e_ (link is coming, it's also a fork I'm working on, not published yet) nodes out of the box and provides a visual and quality-of-life improvement over the original _Behaviour3 Editor_.
+**Behavior3+ Editor** is primarily a standalone engine/library - agnostic behavior tree editor (but probably can still be hosted online) based on [Behaviour3 Editor](https://github.com/behavior3/behavior3editor).
+
+_**Create** custom nodes, **develop** your bahavior trees, **export** them to JSON, parse them in your engine._
+
+This version of the editor supports all of the _luabehaviourtree 2e_ (link is coming, it's also a fork I'm working on, not published yet) nodes out of the box and provides a visual and quality-of-life improvement over the original _Behaviour3 Editor_.
 
 **New features** include:
 - Cleaner overall visuals
