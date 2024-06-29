@@ -2,9 +2,14 @@
     "appId": "Behaviour3+ Editor",
     "icon": "build/imgs/favicon.png",
     "asar": true,
+    "publish": null,
     "files": [
         "build/**/*",
         "node_modules/**/*",
         "package.json"
-    ]
+    ],
+    "nsis": {
+        "oneClick": false,
+        "allowToChangeInstallationDirectory": true
+    }
 }
