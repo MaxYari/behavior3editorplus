@@ -34,7 +34,8 @@ var vendor_js = [
   'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
   'bower_components/angular-ui-router/release/angular-ui-router.min.js',
   'bower_components/sweetalert/dist/sweetalert.min.js',
-  'node_modules/fontawesome-iconpicker/dist/js/fontawesome-iconpicker.min.js'
+  'node_modules/fontawesome-iconpicker/dist/js/fontawesome-iconpicker.min.js',
+  'src/assets/libs/fontawesome-icons-meta.js'
 ];
 var vendor_css = [
   'bower_components/bootstrap/dist/css/bootstrap.min.css',
@@ -65,9 +66,7 @@ var app_js = [
   'src/app/**/*.js',
   'src/start.js',
 ];
-var app_json = [
-  'bower_components/fontawesome/metadata/icons.json',
-];
+
 var app_less = [
   'src/assets/less/index.less',
 ];
@@ -152,10 +151,6 @@ gulp.task('_app_js_build', function () {
     .pipe(connect.reload())
 });
 
-gulp.task("_app_json", function () {
-  return gulp.src(app_json)
-    .pipe(gulp.dest('build/json'))
-})
 
 gulp.task('_app_less', function () {
   return gulp.src(app_less)
@@ -192,7 +187,6 @@ gulp.task('_app_entry', function () {
 
 gulp.task('_app_dev', [
   '_app_js_dev',
-  "_app_json",
   '_app_less',
   '_app_imgs',
   '_app_html',
@@ -200,7 +194,6 @@ gulp.task('_app_dev', [
 ]);
 gulp.task('_app_build', [
   '_app_js_build',
-  "_app_json",
   '_app_less',
   '_app_imgs',
   '_app_html',

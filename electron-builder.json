@@ -1,7 +1,7 @@
 {
     "appId": "Behaviour3+ Editor",
-    "icon": "build/imgs/icon_big.png",
-    "asar": false,
+    "icon": "build/imgs/favicon.png",
+    "asar": true,
     "files": [
         "build/**/*",
         "node_modules/**/*",

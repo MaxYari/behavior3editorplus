@@ -1,12 +1,4 @@
-// Synchroniously fetch fontawesome icons metadata, includes raw svgs as strings
-var app = require('electron').remote.app;
-var path = require('path');
 
-$.ajaxSetup({ async: false });
-if (!window.faIconsMeta) {
-  $.getJSON(path.join(app.getAppPath(), "json/icons.json"), function (d) { window.faIconsMeta = d; });
-}
-$.ajaxSetup({ async: true });
 
 // Setup Angular
 angular.module('app', [

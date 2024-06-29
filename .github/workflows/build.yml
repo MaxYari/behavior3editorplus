@@ -25,6 +25,7 @@ jobs:
           node-version: 20.11.0
 
       - run: npm install
+      - run: npx bower install
       - run: npm run builddev
 
       - name: Build/release Electron app on Linux
@@ -32,7 +33,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          npx electron-builder --linux appimage tar.gz  # Specify Linux targets to avoid .deb
+          npx electron-builder -p onTagOrDraft --linux appimage tar.gz  # Specify Linux targets to avoid .deb
         continue-on-error: true
 
       - name: Build/release Electron app on Windows
@@ -40,7 +41,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          npx electron-builder --win nsis zip  # Specify Windows targets
+          npx electron-builder -p onTagOrDraft --win nsis zip
         continue-on-error: true
 
       - name: Upload Artifacts

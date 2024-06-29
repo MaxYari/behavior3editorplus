@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, dialog, crashReporter } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog, crashReporter, globalShortcut } = require('electron');
 
 const path = require('path')
 
@@ -48,7 +48,7 @@ app.on('ready', function () {
 
 
   // Open the DevTools.
-  mainWindow.openDevTools();
+  //mainWindow.openDevTools();
   mainWindow.webContents.on('new-window', function (e, url) {
     e.preventDefault();
     require('electron').shell.openExternal(url);
@@ -61,8 +61,16 @@ app.on('ready', function () {
     // when you should delete the corresponding element.
     mainWindow = null;
   });
+});
 
+// Register a shortcut to open DevTools
+app.on('browser-window-focus', () => {
+  globalShortcut.register('Ctrl+Shift+I', () => {
+    mainWindow.webContents.toggleDevTools();
+  });
+});
 
-
+app.on('browser-window-blur', () => {
+  globalShortcut.unregister('Ctrl+Shift+I');
 });
 
