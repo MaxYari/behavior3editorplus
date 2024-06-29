@@ -2,7 +2,7 @@
 
 ![interface preview](preview.png)
 
-**Behavior3+ Editor** is primarily a standalone engine/library - agnostic behavior tree editor (but probably can still be hosted online) based on [Behaviour3 Editor](https://github.com/behavior3/behavior3editor).
+**Behavior3+ Editor** is primarily a standalone behavior tree editor (but probably can still be hosted online) that can be used with any library/engine. It's based on [Behaviour3 Editor](https://github.com/behavior3/behavior3editor).
 
 _**Create** custom nodes, **develop** your bahavior trees, **export** them to JSON, parse them in your engine._
 
