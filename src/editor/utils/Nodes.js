@@ -26,6 +26,15 @@ b3e.RunRandomWeight = {
   properties: { weight: 1 }
 };
 
+b3e.Parallel = {
+  name: "Parallel",
+  category: "composite",
+  title: "[Parallel]",
+  icon: { className: "fas fa-mars-double" },
+  description: "Runs all child nodes in parallel (simultaneously). If 'waitForAll' is 'true' - ends only when all children are done (repots success). Otherwise ends whenever one of the children ends and reports the same result as its child.",
+  properties: { waitForAll: false }
+};
+
 b3e.Sequence = {
   name: "Sequence",
   category: "composite",

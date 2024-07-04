@@ -30,6 +30,7 @@
     this.nodes.add(b3e.SequenceUntilFailure, true);
     this.nodes.add(b3e.SequenceUntilSuccess, true);
     this.nodes.add(b3e.RunRandom, true);
+    this.nodes.add(b3e.Parallel, true);
     this.nodes.add(b3e.RunRandomWeight, true);
     //this.nodes.add(b3e.MemSequence, true);
     //this.nodes.add(b3e.MemPriority, true);
