@@ -87,13 +87,25 @@ b3e.editor.CameraSystem = function (editor) {
     var tree = project.trees.getSelected();
     if (!tree) return;
 
+    var origMouse = tree.view.getLocalPoint(editor._game.mouse.x, editor._game.mouse.y);
+
+    //console.log(prezoomX, prezoomY)
     //if (e.ctrlKey) {
     if ((e.wheelDeltaY || e.deltaY) > 0) {
       tree.view.zoomIn();
     } else {
       tree.view.zoomOut();
     }
-    //}
+
+    var oldMouseGlobal = tree.localToGlobal(origMouse.x, origMouse.y);
+
+    var offsetVector = {
+      x: editor._game.mouse.x - oldMouseGlobal.x,
+      y: editor._game.mouse.y - oldMouseGlobal.y
+    };
+
+    // Ensure that we are zooming towards the cursor
+    tree.view.setCam(tree.x + offsetVector.x, tree.y + offsetVector.y);
   };
 
 

@@ -49,5 +49,6 @@ b3e.tree.ViewManager = function (editor, project, tree) {
     return tree.globalToLocal(x, y);
   };
 
+
   this._applySettings = function (settings) { };
 };

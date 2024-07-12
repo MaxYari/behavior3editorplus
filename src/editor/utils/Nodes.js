@@ -168,19 +168,19 @@ b3e.MemPriority = $.extend(b3.MemPriority.prototype, {
 b3e.Repeater = $.extend(b3.Repeater.prototype, {
   title: "Repeat",
   icon: { className: "fas fa-redo" },
-  description: "Repeats a child task specified amount of times ('maxLoop' parameter, -1 = no limit).<br>Always reports success when done.",
+  description: "Executes a child task specified amount of times ('maxLoop' parameter, -1 = no limit, 'maxLoop' = 1 - only once).<br>Always reports success when done.",
   properties: { "maxLoop": -1 }
 });
 b3e.RepeatUntilFailure = $.extend(b3.RepeatUntilFailure.prototype, {
   title: "[Repeat] Until Failure",
   icon: { className: "fas fa-redo" },
-  description: "Repeats a child task specified amount of times ('maxLoop' parameter, -1 = no limit).<br>Stops and reports failure at a first child task failure.<br>Will report success if all repetitions were done without a single child failure.",
+  description: "Executes a child task specified amount of times ('maxLoop' parameter, -1 = no limit).<br>Stops and reports failure at a first child task failure.<br>Will report success if all repetitions were done without a single child failure.",
   properties: { "maxLoop": -1 }
 });
 b3e.RepeatUntilSuccess = $.extend(b3.RepeatUntilSuccess.prototype, {
   title: "[Repeat] Until Success",
   icon: { className: "fas fa-redo" },
-  description: "Repeats a child task specified amount of times ('maxLoop' parameter, -1 = no limit).<br>Stops and reports success after a first child task success.<br>Will report failure if all repetitions were done without a single child success.",
+  description: "Executes a child task specified amount of times ('maxLoop' parameter, -1 = no limit).<br>Stops and reports success after a first child task success.<br>Will report failure if all repetitions were done without a single child success.",
   properties: { "maxLoop": -1 }
 });
 b3e.MaxTime = $.extend(b3.MaxTime.prototype, {
