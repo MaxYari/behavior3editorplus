@@ -6,7 +6,7 @@
 
 _**Create** custom nodes, **develop** your bahavior trees, **export** them to JSON, parse them in your engine._
 
-This version of the editor supports all of the _luabehaviourtree 2e_ (link is coming, it's also a fork I'm working on, not published yet) nodes out of the box and provides a visual and quality-of-life improvement over the original _Behaviour3 Editor_.
+This version of the editor supports all of the _[luabehaviourtree 2e](https://github.com/MaxYari/behaviourtreelua2e)_ nodes out of the box and provides a visual and quality-of-life improvement over the original _Behaviour3 Editor_.
 
 **New features** include:
 - Cleaner overall visuals
@@ -16,7 +16,7 @@ This version of the editor supports all of the _luabehaviourtree 2e_ (link is co
 - Automatic GitHub release builds
 - Few other minor changes and bug fixes
 
-Behaviour3+ Editor and _luabehaviourtree 2e_(TODO: add link) were actively used in the development of _Combat AI Behavior Overhaul_ for [OpenMW](https://openmw.org/)
+Behaviour3+ Editor and _[luabehaviourtree 2e](https://github.com/MaxYari/behaviourtreelua2e)_ were actively used in the development of _[Mercy: Combat AI Overhaul](https://github.com/MaxYari/OpenMWMercyCAO)_ ([also on Nexus](https://www.nexusmods.com/morrowind/mods/55064)) for [OpenMW](https://openmw.org/)
 
 ## Installation
 
